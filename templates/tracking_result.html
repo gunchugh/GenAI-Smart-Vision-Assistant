@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Object Tracking</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎯 Object Tracking Completed</h1>
+
+    <video width="700" controls>
+
+        <source
+        src="{{ url_for('static', filename='tracking/' + video) }}"
+        type="video/mp4">
+
+    </video>
+
+    <br><br>
+
+    <a href="/">
+
+        <button>
+
+            Track Another Video
+
+        </button>
+
+    </a>
+
+</div>
+
+</body>
+
+</html>

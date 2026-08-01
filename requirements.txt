@@ -1,0 +1,11 @@
+flask
+ultralytics
+opencv-python
+numpy
+Pillow
+torch
+transformers
+gtts
+faster-whisper
+matplotlib
+reportlab

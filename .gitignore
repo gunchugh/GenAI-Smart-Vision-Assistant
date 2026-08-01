@@ -1,0 +1,15 @@
+venv/
+__pycache__/
+*.pyc
+
+uploads/
+runs/
+outputs/
+
+static/audio/
+static/charts/
+static/results/
+static/recordings/
+
+.env
+.DS_Store

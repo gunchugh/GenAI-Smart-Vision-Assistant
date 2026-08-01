@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Video Detection</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎥 Video Detection Completed</h1>
+
+    <video width="700" controls>
+
+        <source
+        src="{{ url_for('static', filename='videos/' + video) }}"
+        type="video/mp4">
+
+    </video>
+
+    <br><br>
+
+    <a href="/">
+
+        <button>
+
+            Detect Another Video
+
+        </button>
+
+    </a>
+
+</div>
+
+</body>
+
+</html>
