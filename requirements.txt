@@ -9,3 +9,4 @@ gtts
 faster-whisper
 matplotlib
 reportlab
+gunicorn
