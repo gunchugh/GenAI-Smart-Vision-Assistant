@@ -1,13 +1,26 @@
 from faster_whisper import WhisperModel
 
-# Load model only once
-model = WhisperModel(
-    "base",
-    device="cpu",
-    compute_type="int8"
-)
+# Lazy Load
+model = None
+
+
+def get_model():
+    global model
+
+    if model is None:
+        model = WhisperModel(
+            "base",
+            device="cpu",
+            compute_type="int8"
+        )
+
+    return model
+
 
 def speech_to_text(audio_path):
+
+    model = get_model()
+
     segments, info = model.transcribe(audio_path)
 
     text = ""

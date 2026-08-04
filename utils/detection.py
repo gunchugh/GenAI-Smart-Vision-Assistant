@@ -2,10 +2,19 @@ from ultralytics import YOLO
 import cv2
 import os
 
-model = YOLO("yolo11n.pt")
+# Lazy Load
+model = None
+
+def get_model():
+    global model
+    if model is None:
+        model = YOLO("yolo11n.pt")
+    return model
 
 
 def detect_image(image_path):
+
+    model = get_model()
 
     results = model(image_path)
 
@@ -36,8 +45,7 @@ def detect_image(image_path):
         object_count[label] = object_count.get(label, 0) + 1
 
         confidence_sum[label] = (
-            confidence_sum.get(label, 0)
-            + confidence
+            confidence_sum.get(label, 0) + confidence
         )
 
     dashboard = {}

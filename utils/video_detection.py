@@ -1,14 +1,26 @@
 from ultralytics import YOLO
 import os
 
-model = YOLO("yolo11n.pt")
+# Lazy Load
+model = None
+
+
+def get_model():
+    global model
+
+    if model is None:
+        model = YOLO("yolo11n.pt")
+
+    return model
 
 
 def detect_video(video_path):
 
+    model = get_model()
+
     os.makedirs("static/videos", exist_ok=True)
 
-    results = model.predict(
+    model.predict(
         source=video_path,
         save=True,
         project="static",
