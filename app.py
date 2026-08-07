@@ -59,6 +59,9 @@ def detect():
     bar_chart, pie_chart, confidence_chart, summary = generate_charts(dashboard)
     
     gc.collect()
+    app.config["LAST_RESULT_IMAGE"] = image_name
+    app.config["LAST_BAR_CHART"] = bar_chart
+    app.config["LAST_SUMMARY"] = summary
     return render_template(
         "result.html",
         image=image_name,
@@ -216,6 +219,8 @@ def voice_ask():
         audio_path,
         image_path
     )
+    app.config["LAST_VOICE_QUESTION"] = question
+    app.config["LAST_VOICE_ANSWER"] = answer
     
     
     return {
@@ -232,10 +237,40 @@ def download_report():
     answer = app.config.get("LAST_ANSWER", "Not Answered")
 
     pdf = generate_report(
-        caption,
-        question,
-        answer
+
+    caption=caption,
+
+    question=question,
+
+    answer=answer,
+
+    original_image=app.config.get("LAST_IMAGE"),
+
+    detected_image=os.path.join(
+        "static",
+        "results",
+        app.config.get("LAST_RESULT_IMAGE")
+    ),
+
+    chart=os.path.join(
+        "static",
+        "charts",
+        app.config.get("LAST_BAR_CHART")
+    ),
+
+    summary=app.config.get("LAST_SUMMARY"),
+
+    voice_question=app.config.get(
+        "LAST_VOICE_QUESTION",
+        "Not Asked"
+    ),
+
+    voice_answer=app.config.get(
+        "LAST_VOICE_ANSWER",
+        "Not Answered"
     )
+
+)
 
     return send_from_directory(
         "static",
