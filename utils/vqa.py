@@ -1,5 +1,7 @@
 from transformers import ViltProcessor, ViltForQuestionAnswering
 from PIL import Image
+import torch
+import gc
 
 # Lazy Load
 processor = None
@@ -29,18 +31,27 @@ def answer_question(image_path, question):
 
     image = Image.open(image_path).convert("RGB")
 
-    encoding = processor(
-        image,
-        question,
-        return_tensors="pt"
-    )
+    with torch.inference_mode():
 
-    outputs = model(**encoding)
+        encoding = processor(
+            image,
+            question,
+            return_tensors="pt"
+        )
+
+        outputs = model(**encoding)
 
     logits = outputs.logits
 
     idx = logits.argmax(-1).item()
 
     answer = model.config.id2label[idx]
+
+    image.close()
+
+    del encoding
+    del outputs
+
+    gc.collect()
 
     return answer

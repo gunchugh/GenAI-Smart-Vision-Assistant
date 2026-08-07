@@ -1,17 +1,16 @@
 from ultralytics import YOLO
 import os
+import gc
+import torch
 
-# Lazy Load
+torch.set_num_threads(2)
+
 model = None
 
-
 def get_model():
-
     global model
-
     if model is None:
         model = YOLO("yolo11n.pt")
-
     return model
 
 
@@ -21,20 +20,22 @@ def track_video(video_path):
 
     os.makedirs("static/tracking", exist_ok=True)
 
-    model.track(
-        source=video_path,
-        tracker="bytetrack.yaml",
-        save=True,
-        project="static",
-        name="tracking",
-        exist_ok=True,
-        persist=True
-    )
+    with torch.inference_mode():
+        model.track(
+            source=video_path,
+            tracker="bytetrack.yaml",
+            save=True,
+            project="static",
+            name="tracking",
+            exist_ok=True,
+            persist=True,
+            verbose=False
+        )
 
-    output_path = os.path.join(
+    gc.collect()
+
+    return os.path.join(
         "static",
         "tracking",
         os.path.basename(video_path)
     )
-
-    return output_path

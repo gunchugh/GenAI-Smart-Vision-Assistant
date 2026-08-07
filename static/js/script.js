@@ -97,3 +97,75 @@ function typeWriter() {
 window.addEventListener("load", () => {
     setTimeout(typeWriter, 300);
 });
+/* ==========================================
+   PART 1 - ASK AI
+========================================== */
+
+async function askAI() {
+
+    const questionBox = document.getElementById("question");
+    const answerBox = document.getElementById("answer");
+
+    if (!questionBox || !answerBox) {
+        console.error("Question or Answer element not found.");
+        return;
+    }
+
+    const question = questionBox.value.trim();
+
+    if (question === "") {
+        alert("Please enter a question.");
+        return;
+    }
+
+    answerBox.innerHTML = "⏳ AI is thinking...";
+
+    try {
+
+        const formData = new FormData();
+
+        formData.append(
+            "question",
+            question
+        );
+
+        const response = await fetch(
+            "/ask",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Server Error");
+        }
+
+        const data = await response.json();
+
+        answerBox.innerHTML =
+            "<b>Answer:</b> " + data.answer;
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        answerBox.innerHTML =
+            "❌ Unable to get answer.";
+
+    }
+
+}
+
+
+/* ==========================================
+   SMALL HELPER
+========================================== */
+
+function showMessage(message) {
+
+    console.log(message);
+
+}

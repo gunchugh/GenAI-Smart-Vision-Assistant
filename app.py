@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import os
+import gc
 
 from utils.detection import detect_image
 from utils.video_detection import detect_video
@@ -57,7 +58,7 @@ def detect():
 
     bar_chart, pie_chart, confidence_chart, summary = generate_charts(dashboard)
     
-
+    gc.collect()
     return render_template(
         "result.html",
         image=image_name,
@@ -94,6 +95,7 @@ def video_detect():
 
     output_video = detect_video(filepath)
 
+    gc.collect()
     return render_template(
         "video_result.html",
         video=os.path.basename(output_video)
@@ -122,6 +124,7 @@ def track():
 
     output_video = track_video(filepath)
 
+    gc.collect()
     return render_template(
         "tracking_result.html",
         video=os.path.basename(output_video)

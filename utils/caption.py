@@ -1,5 +1,7 @@
 from transformers import BlipProcessor, BlipForConditionalGeneration
 from PIL import Image
+import torch
+import gc
 
 processor = None
 model = None
@@ -28,16 +30,25 @@ def generate_caption(image_path):
 
     image = Image.open(image_path).convert("RGB")
 
-    inputs = processor(
-        image,
-        return_tensors="pt"
-    )
+    with torch.inference_mode():
 
-    output = model.generate(**inputs)
+        inputs = processor(
+            image,
+            return_tensors="pt"
+        )
+
+        output = model.generate(**inputs)
 
     caption = processor.decode(
         output[0],
         skip_special_tokens=True
     )
+
+    image.close()
+
+    del inputs
+    del output
+
+    gc.collect()
 
     return caption

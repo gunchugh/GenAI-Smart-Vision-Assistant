@@ -8,11 +8,11 @@ def get_model():
     global model
 
     if model is None:
-        model = WhisperModel(
-            "base",
-            device="cpu",
-            compute_type="int8"
-        )
+     WhisperModel(
+        "tiny",
+        device="cpu",
+        compute_type="int8"
+)
 
     return model
 
