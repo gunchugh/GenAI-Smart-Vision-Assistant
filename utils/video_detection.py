@@ -46,29 +46,22 @@ def detect_video(video_path):
         )
 
     # Latest generated video
-    generated = glob.glob("runs/detect_video/*.mp4")
+    generated = glob.glob("runs/detect/static/videos/*")
 
     if not generated:
-        raise Exception("Output video not found.")
+     raise Exception("Output video not found.")
 
     latest = max(generated, key=os.path.getctime)
 
-    final_name = "detected_video.mp4"
+    final_name = os.path.basename(latest)
 
     final_path = os.path.join(
-        output_folder,
-        final_name
-    )
+    output_folder,
+    final_name
+)
 
     shutil.copy(latest, final_path)
 
     gc.collect()
-    print("Generated files:")
-    print(glob.glob("runs/detect_video/*"))
 
-    print("Final video:")
-    print(final_path)
-
-    print("Exists:", os.path.exists(final_path))
-    gc.collect()
-    return final_path
+    return final_path 
