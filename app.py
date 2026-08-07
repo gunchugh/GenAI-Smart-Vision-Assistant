@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 import os
 import gc
 
@@ -237,9 +237,11 @@ def download_report():
         answer
     )
 
-    return {
-        "pdf": pdf
-    }
+    return send_from_directory(
+        "static",
+        pdf,
+        as_attachment=True
+    )
 # ---------------- RUN APP ---------------- #
 
 if __name__ == "__main__":
