@@ -13,43 +13,228 @@
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
 
+    <style>
+
+        .tracking-video-wrapper {
+
+            width: 100%;
+
+            max-width: 900px;
+
+            margin: 0 auto;
+
+            background: #000;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+        }
+
+        .tracking-video-wrapper video {
+
+            display: block;
+
+            width: 100%;
+
+            height: auto;
+
+            max-height: 600px;
+
+            background: #000;
+
+        }
+
+        .tracking-video-error {
+
+            display: none;
+
+            padding: 20px;
+
+            text-align: center;
+
+            color: #dc2626;
+
+            font-weight: 600;
+
+        }
+
+        .tracking-buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 18px;
+
+            flex-wrap: wrap;
+
+            margin-top: 35px;
+
+        }
+
+        .tracking-button {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 240px;
+
+            padding: 15px 28px;
+
+            border-radius: 14px;
+
+            text-decoration: none;
+
+            color: white !important;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            transition: all .3s ease;
+
+            border: none;
+
+        }
+
+        .tracking-download {
+
+            background: linear-gradient(
+                135deg,
+                #2563EB,
+                #3B82F6
+            );
+
+        }
+
+        .tracking-report {
+
+            background: linear-gradient(
+                135deg,
+                #7C3AED,
+                #9333EA
+            );
+
+        }
+
+        .tracking-another {
+
+            background: linear-gradient(
+                135deg,
+                #0891B2,
+                #2563EB
+            );
+
+        }
+
+        .tracking-button:hover {
+
+            transform: translateY(-5px);
+
+            color: white !important;
+
+            text-decoration: none;
+
+        }
+
+        @media(max-width:768px) {
+
+            .tracking-buttons {
+
+                flex-direction: column;
+
+            }
+
+            .tracking-button {
+
+                width: 100%;
+
+                max-width: 320px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
+
 
     <h1>🎯 Object Tracking Completed</h1>
 
+
     <br>
 
-    <video
-        width="900"
-        controls
-        autoplay
-        muted
-        playsinline
-        preload="metadata">
 
-        <source
-            src="{{ url_for('static', filename='tracking/' + video) }}"
-            type="video/mp4">
+    <!-- =========================================
+         TRACKED VIDEO
+    ========================================= -->
 
-        Your browser does not support HTML5 video.
+    <div class="result-image-card">
 
-    </video>
+        <h2>🎬 Tracked Video</h2>
 
-    <br><br>
+        <br>
+
+        <div class="tracking-video-wrapper">
+
+            <video
+                id="trackingVideo"
+                controls
+                playsinline
+                preload="metadata">
+
+                <source
+                    src="{{ url_for('static', filename='tracking/' + video) }}"
+                    type="video/mp4">
+
+                Your browser does not support HTML5 video.
+
+            </video>
+
+        </div>
+
+        <div
+            id="trackingVideoError"
+            class="tracking-video-error">
+
+            ⚠️ Unable to play the tracked video in the browser.
+            Please use the download button below.
+
+        </div>
+
+    </div>
+
+
+    <br>
+
 
     <h2 style="color:#1E88E5;">
+
         🟢 Tracking Successfully Completed
+
     </h2>
 
+
     <br>
+
 
     <!-- ================= SUMMARY CARDS ================= -->
 
     <div class="summary-grid">
+
 
         <div class="summary-card">
 
@@ -59,6 +244,7 @@
 
         </div>
 
+
         <div class="summary-card">
 
             <h2>{{ summary.unique_classes }}</h2>
@@ -66,6 +252,7 @@
             <p>Unique Classes</p>
 
         </div>
+
 
         <div class="summary-card">
 
@@ -75,6 +262,7 @@
 
         </div>
 
+
         <div class="summary-card">
 
             <h2>{{ summary.tracker }}</h2>
@@ -83,53 +271,67 @@
 
         </div>
 
+
     </div>
 
+
     <br><br>
+
 
     <!-- ================= TRACKING INFORMATION ================= -->
 
     <h2>📊 Tracking Information</h2>
 
+
     <div class="caption-card">
 
         <p class="caption-text">
 
-            ✔ <b>Tracking Status :</b> {{ summary.tracking_status }}
+            ✔ <b>Tracking Status :</b>
+            {{ summary.tracking_status }}
 
             <br><br>
 
-            ✔ <b>Detection Model :</b> {{ summary.model }}
+            ✔ <b>Detection Model :</b>
+            {{ summary.model }}
 
             <br><br>
 
-            ✔ <b>Tracking Algorithm :</b> {{ summary.tracker }}
+            ✔ <b>Tracking Algorithm :</b>
+            {{ summary.tracker }}
 
             <br><br>
 
-            ✔ <b>Input Type :</b> {{ summary.input_type }}
+            ✔ <b>Input Type :</b>
+            {{ summary.input_type }}
 
             <br><br>
 
-            ✔ <b>Persistent IDs :</b> Enabled
+            ✔ <b>Persistent IDs :</b>
+            Enabled
 
             <br><br>
 
-            ✔ <b>Tracking Type :</b> Multi Object Tracking
+            ✔ <b>Tracking Type :</b>
+            Multi Object Tracking
 
             <br><br>
 
-            ✔ <b>Output :</b> Tracked Video with Unique IDs
+            ✔ <b>Output :</b>
+            Tracked Video with Unique IDs
 
         </p>
 
     </div>
 
+
     <br><br>
+
 
     <!-- ================= TRACKED OBJECTS ================= -->
 
     <h2>📋 Tracked Objects Summary</h2>
+
 
     <table border="1" cellpadding="10" cellspacing="0">
 
@@ -140,6 +342,7 @@
             <th>Count</th>
 
         </tr>
+
 
         {% for label, data in dashboard.items() %}
 
@@ -155,11 +358,14 @@
 
     </table>
 
+
     <br><br>
+
 
     <!-- ================= ABOUT ================= -->
 
     <h2>ℹ About Object Tracking</h2>
+
 
     <div class="caption-card">
 
@@ -184,45 +390,84 @@
 
     </div>
 
+
     <br><br>
+
 
     <!-- ================= BUTTONS ================= -->
 
-    <a href="{{ url_for('static', filename='tracking/' + video) }}" download>
+    <div class="tracking-buttons">
 
-        <button>
 
-            ⬇ Download Tracked Video
+        <!-- DOWNLOAD TRACKED VIDEO -->
 
-        </button>
+        <a
+            href="{{ url_for('static', filename='tracking/' + video) }}"
+            download="{{ video }}"
+            class="tracking-button tracking-download">
 
-    </a>
+            ⬇️ Download Tracked Video
 
-    <br><br>
+        </a>
 
-    <a href="/download_tracking_report">
 
-        <button>
+        <!-- DOWNLOAD REPORT -->
+
+        <a
+            href="/download_tracking_report"
+            class="tracking-button tracking-report">
 
             📄 Download Tracking Report
 
-        </button>
+        </a>
 
-    </a>
 
-    <br><br>
+        <!-- TRACK ANOTHER -->
 
-    <a href="/">
-
-        <button>
+        <a
+            href="/"
+            class="tracking-button tracking-another">
 
             🔄 Track Another Video
 
-        </button>
+        </a>
 
-    </a>
+
+    </div>
+
 
 </div>
+
+
+<script>
+
+    const trackingVideo =
+        document.getElementById("trackingVideo");
+
+    const trackingVideoError =
+        document.getElementById("trackingVideoError");
+
+
+    trackingVideo.addEventListener("error", function () {
+
+        trackingVideoError.style.display = "block";
+
+    });
+
+
+    trackingVideo.addEventListener("loadedmetadata", function () {
+
+        console.log("Tracking video loaded successfully.");
+
+        console.log(
+            "Tracking video duration:",
+            trackingVideo.duration
+        );
+
+    });
+
+</script>
+
 
 </body>
 

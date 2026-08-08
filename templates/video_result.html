@@ -14,37 +14,24 @@
 
     <style>
 
-        /* =========================================
-           VIDEO RESULT ACTION BUTTONS
-        ========================================= */
-
         .result-actions {
 
             display: flex;
-
             justify-content: center;
-
             align-items: center;
-
             gap: 18px;
-
             flex-wrap: wrap;
-
             margin: 45px 0 30px;
 
         }
 
-
         .result-action {
 
             display: inline-flex;
-
             align-items: center;
-
             justify-content: center;
 
             min-width: 240px;
-
             padding: 15px 28px;
 
             border-radius: 14px;
@@ -54,7 +41,6 @@
             color: white !important;
 
             font-size: 16px;
-
             font-weight: 700;
 
             border: none;
@@ -67,9 +53,6 @@
 
         }
 
-
-        /* Download Detected Video */
-
         .download-video {
 
             background: linear-gradient(
@@ -79,9 +62,6 @@
             );
 
         }
-
-
-        /* Download Video Report */
 
         .download-report {
 
@@ -93,9 +73,6 @@
 
         }
 
-
-        /* Detect Another Video */
-
         .another-video {
 
             background: linear-gradient(
@@ -105,7 +82,6 @@
             );
 
         }
-
 
         .result-action:hover {
 
@@ -120,8 +96,47 @@
 
         }
 
+        .video-wrapper {
 
-        /* Mobile */
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+
+            background: #000;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+        }
+
+        .video-wrapper video {
+
+            display: block;
+
+            width: 100%;
+
+            height: auto;
+
+            max-height: 600px;
+
+            background: #000;
+
+        }
+
+        .video-error {
+
+            display: none;
+
+            padding: 20px;
+
+            text-align: center;
+
+            color: #dc2626;
+
+            font-weight: 600;
+
+        }
 
         @media(max-width:768px) {
 
@@ -134,7 +149,6 @@
             .result-action {
 
                 width: 100%;
-
                 max-width: 320px;
 
             }
@@ -174,22 +188,32 @@
 
         <h2>🎬 Detected Video</h2>
 
-        <video
-            width="900"
-            controls
-            autoplay
-            muted
-            playsinline
-            preload="metadata"
-            style="width:100%; max-width:900px; border-radius:18px;">
+        <br>
 
-            <source
-                src="{{ url_for('static', filename='videos/' + video) }}"
-                type="video/mp4">
+        <div class="video-wrapper">
 
-            Your browser does not support HTML5 video.
+            <video
+                id="detectedVideo"
+                controls
+                playsinline
+                preload="metadata">
 
-        </video>
+                <source
+                    src="{{ url_for('static', filename='videos/' + video) }}"
+                    type="video/mp4">
+
+                Your browser does not support HTML5 video.
+
+            </video>
+
+        </div>
+
+        <div id="videoError" class="video-error">
+
+            ⚠️ Unable to play this video in the browser.
+            Please use the download button below.
+
+        </div>
 
     </div>
 
@@ -242,74 +266,40 @@
 
     <div class="summary-grid">
 
-
         <div class="summary-card">
 
-            <h2>
+            <h2>{{ summary.total_objects }}</h2>
 
-                {{ summary.total_objects }}
-
-            </h2>
-
-            <p>
-
-                Total Objects
-
-            </p>
+            <p>Total Objects</p>
 
         </div>
 
 
         <div class="summary-card">
 
-            <h2>
+            <h2>{{ summary.unique_classes }}</h2>
 
-                {{ summary.unique_classes }}
-
-            </h2>
-
-            <p>
-
-                Unique Classes
-
-            </p>
+            <p>Unique Classes</p>
 
         </div>
 
 
         <div class="summary-card">
 
-            <h2>
+            <h2>{{ summary.most_detected.title() }}</h2>
 
-                {{ summary.most_detected.title() }}
-
-            </h2>
-
-            <p>
-
-                Most Detected
-
-            </p>
+            <p>Most Detected</p>
 
         </div>
 
 
         <div class="summary-card">
 
-            <h2>
+            <h2>{{ summary.average_confidence }}%</h2>
 
-                {{ summary.average_confidence }}%
-
-            </h2>
-
-            <p>
-
-                Average Confidence
-
-            </p>
+            <p>Average Confidence</p>
 
         </div>
-
 
     </div>
 
@@ -324,7 +314,6 @@
     <div class="result-image-card">
 
         <h2>📊 Detection Summary</h2>
-
 
         <table>
 
@@ -343,30 +332,15 @@
 
             <tr>
 
-                <td>
+                <td>{{ label.title() }}</td>
 
-                    {{ label.title() }}
+                <td>{{ data.count }}</td>
 
-                </td>
-
-
-                <td>
-
-                    {{ data.count }}
-
-                </td>
-
-
-                <td>
-
-                    {{ data.confidence }}%
-
-                </td>
+                <td>{{ data.confidence }}%</td>
 
             </tr>
 
             {% endfor %}
-
 
         </table>
 
@@ -380,11 +354,11 @@
     <div class="result-actions">
 
 
-        <!-- DOWNLOAD VIDEO -->
+        <!-- DOWNLOAD DETECTED VIDEO -->
 
         <a
             href="{{ url_for('static', filename='videos/' + video) }}"
-            download
+            download="{{ video }}"
             class="result-action download-video">
 
             ⬇️ Download Detected Video
@@ -421,6 +395,31 @@
 
 
 </div>
+
+
+<script>
+
+    const video = document.getElementById("detectedVideo");
+
+    const videoError = document.getElementById("videoError");
+
+
+    video.addEventListener("error", function () {
+
+        videoError.style.display = "block";
+
+    });
+
+
+    video.addEventListener("loadedmetadata", function () {
+
+        console.log("Detected video loaded successfully.");
+
+        console.log("Duration:", video.duration);
+
+    });
+
+</script>
 
 
 </body>
