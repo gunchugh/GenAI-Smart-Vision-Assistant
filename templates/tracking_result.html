@@ -181,43 +181,35 @@
     <!-- =========================================
          TRACKED VIDEO
     ========================================= -->
+<div class="result-image-card">
 
-    <div class="result-image-card">
+    <h2>🎯 Tracked Video</h2>
 
-        <h2>🎬 Tracked Video</h2>
+    <video
+    controls
+    playsinline
+    preload="auto"
+    style="width:100%; max-width:900px; border-radius:18px; display:block; margin:auto;"
+    id="trackedVideo">
 
-        <br>
+    <source
+        src="{{ url_for('static', filename='tracking/' + video) }}?v=2"
+        type="video/mp4">
 
-        <div class="tracking-video-wrapper">
+    Your browser does not support HTML5 video.
 
-            <video
-                id="trackingVideo"
-                controls
-                playsinline
-                preload="metadata">
+</video>
 
-                <source
-                    src="{{ url_for('static', filename='tracking/' + video) }}"
-                    type="video/mp4">
+</div>
+   
 
-                Your browser does not support HTML5 video.
+<script>
+    const video = document.getElementById("trackingVideo");
 
-            </video>
-
-        </div>
-
-        <div
-            id="trackingVideoError"
-            class="tracking-video-error">
-
-            ⚠️ Unable to play the tracked video in the browser.
-            Please use the download button below.
-
-        </div>
-
-    </div>
-
-
+    video.addEventListener("error", function () {
+        console.log("Tracking video error:", video.error);
+    });
+</script>
     <br>
 
 
