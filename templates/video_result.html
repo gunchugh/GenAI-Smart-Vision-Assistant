@@ -1,41 +1,427 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Video Detection</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Video Detection Result</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
 
+    <style>
+
+        /* =========================================
+           VIDEO RESULT ACTION BUTTONS
+        ========================================= */
+
+        .result-actions {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 18px;
+
+            flex-wrap: wrap;
+
+            margin: 45px 0 30px;
+
+        }
+
+
+        .result-action {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 240px;
+
+            padding: 15px 28px;
+
+            border-radius: 14px;
+
+            text-decoration: none;
+
+            color: white !important;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            border: none;
+
+            cursor: pointer;
+
+            transition: all .3s ease;
+
+            box-shadow: 0 10px 25px rgba(37,99,235,.18);
+
+        }
+
+
+        /* Download Detected Video */
+
+        .download-video {
+
+            background: linear-gradient(
+                135deg,
+                #2563EB,
+                #3B82F6
+            );
+
+        }
+
+
+        /* Download Video Report */
+
+        .download-report {
+
+            background: linear-gradient(
+                135deg,
+                #7C3AED,
+                #9333EA
+            );
+
+        }
+
+
+        /* Detect Another Video */
+
+        .another-video {
+
+            background: linear-gradient(
+                135deg,
+                #0891B2,
+                #2563EB
+            );
+
+        }
+
+
+        .result-action:hover {
+
+            transform: translateY(-5px);
+
+            color: white !important;
+
+            text-decoration: none;
+
+            box-shadow:
+                0 18px 35px rgba(37,99,235,.25);
+
+        }
+
+
+        /* Mobile */
+
+        @media(max-width:768px) {
+
+            .result-actions {
+
+                flex-direction: column;
+
+            }
+
+            .result-action {
+
+                width: 100%;
+
+                max-width: 320px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
 
-    <h1>🎥 Video Detection Completed</h1>
 
-    <video width="700" controls>
+    <!-- =========================================
+         HEADER
+    ========================================= -->
 
-        <source
-        src="{{ url_for('static', filename='videos/' + video) }}">
+    <h1 class="dashboard-header">
 
-    </video>
+        🎥 Video Detection Completed
+
+    </h1>
+
+
+    <br>
+
+
+    <!-- =========================================
+         DETECTED VIDEO
+    ========================================= -->
+
+    <div class="result-image-card">
+
+        <h2>🎬 Detected Video</h2>
+
+        <video
+            width="900"
+            controls
+            autoplay
+            muted
+            playsinline
+            preload="metadata"
+            style="width:100%; max-width:900px; border-radius:18px;">
+
+            <source
+                src="{{ url_for('static', filename='videos/' + video) }}"
+                type="video/mp4">
+
+            Your browser does not support HTML5 video.
+
+        </video>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- =========================================
+         FIRST FRAME
+    ========================================= -->
+
+    <div class="result-image-card">
+
+        <h2>🖼 First Detected Frame</h2>
+
+        <img
+            src="{{ url_for('static', filename='video_frames/' + frame) }}"
+            class="result-image"
+            alt="First Frame">
+
+    </div>
+
+
+    <br>
+
+
+    <!-- =========================================
+         AI CAPTION
+    ========================================= -->
+
+    <div class="caption-card">
+
+        <h2>🤖 AI Generated Caption</h2>
+
+        <p class="caption-text">
+
+            {{ caption }}
+
+        </p>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- =========================================
+         SUMMARY CARDS
+    ========================================= -->
+
+    <div class="summary-grid">
+
+
+        <div class="summary-card">
+
+            <h2>
+
+                {{ summary.total_objects }}
+
+            </h2>
+
+            <p>
+
+                Total Objects
+
+            </p>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <h2>
+
+                {{ summary.unique_classes }}
+
+            </h2>
+
+            <p>
+
+                Unique Classes
+
+            </p>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <h2>
+
+                {{ summary.most_detected.title() }}
+
+            </h2>
+
+            <p>
+
+                Most Detected
+
+            </p>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <h2>
+
+                {{ summary.average_confidence }}%
+
+            </h2>
+
+            <p>
+
+                Average Confidence
+
+            </p>
+
+        </div>
+
+
+    </div>
+
 
     <br><br>
 
-    <a href="/">
 
-        <button>
+    <!-- =========================================
+         DETECTION SUMMARY
+    ========================================= -->
 
-            Detect Another Video
+    <div class="result-image-card">
 
-        </button>
+        <h2>📊 Detection Summary</h2>
 
-    </a>
+
+        <table>
+
+            <tr>
+
+                <th>Object</th>
+
+                <th>Count</th>
+
+                <th>Average Confidence</th>
+
+            </tr>
+
+
+            {% for label, data in dashboard.items() %}
+
+            <tr>
+
+                <td>
+
+                    {{ label.title() }}
+
+                </td>
+
+
+                <td>
+
+                    {{ data.count }}
+
+                </td>
+
+
+                <td>
+
+                    {{ data.confidence }}%
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+
+        </table>
+
+    </div>
+
+
+    <!-- =========================================
+         ACTION BUTTONS
+    ========================================= -->
+
+    <div class="result-actions">
+
+
+        <!-- DOWNLOAD VIDEO -->
+
+        <a
+            href="{{ url_for('static', filename='videos/' + video) }}"
+            download
+            class="result-action download-video">
+
+            ⬇️ Download Detected Video
+
+        </a>
+
+
+        <!-- DOWNLOAD REPORT -->
+
+        <a
+            href="/download_video_report"
+            class="result-action download-report">
+
+            📄 Download Video Report
+
+        </a>
+
+
+        <!-- DETECT ANOTHER VIDEO -->
+
+        <a
+            href="/"
+            class="result-action another-video">
+
+            🔄 Detect Another Video
+
+        </a>
+
+
+    </div>
+
+
+    <br><br>
+
 
 </div>
+
 
 </body>
 

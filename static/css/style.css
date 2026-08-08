@@ -1,20 +1,23 @@
 /* =========================================================
-   GenAI Smart Vision Assistant
-   Professional Premium UI
-   PART 1
+   GenAI SMART VISION ASSISTANT
+   FINAL COMPLETE STYLE.CSS
 ========================================================= */
 
-/* ==========================
+
+/* =========================================================
    RESET
-========================== */
+========================================================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
+
 html{
     scroll-behavior:smooth;
 }
+
 body{
     font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
     background:#F7F9FC;
@@ -23,266 +26,186 @@ body{
     overflow-x:hidden;
     position:relative;
 }
-/* ==========================
+
+
+/* =========================================================
    BACKGROUND
-========================== */
+========================================================= */
+
 body::before{
-
     content:"";
-
     position:fixed;
-
     width:420px;
-
     height:420px;
-
     top:-150px;
-
     left:-150px;
-
     border-radius:50%;
-
     background:rgba(37,99,235,.10);
-
     filter:blur(110px);
-
     animation:blobLeft 14s ease-in-out infinite alternate;
-
     z-index:-2;
-
 }
 
 body::after{
-
     content:"";
-
     position:fixed;
-
     width:420px;
-
     height:420px;
-
     right:-150px;
-
     bottom:-150px;
-
     border-radius:50%;
-
     background:rgba(124,58,237,.10);
-
     filter:blur(110px);
-
     animation:blobRight 16s ease-in-out infinite alternate;
-
     z-index:-2;
-
 }
 
 @keyframes blobLeft{
-
     from{
-
         transform:translate(0,0);
-
     }
 
     to{
-
         transform:translate(120px,80px);
-
     }
-
 }
 
 @keyframes blobRight{
-
     from{
-
         transform:translate(0,0);
-
     }
 
     to{
-
         transform:translate(-120px,-80px);
-
     }
-
 }
 
-/* ==========================
+
+/* =========================================================
    CONTAINER
-========================== */
+========================================================= */
 
 .container{
-
     width:90%;
-
     max-width:1250px;
-
     margin:auto;
-
 }
 
-/* ==========================
+
+/* =========================================================
    NAVBAR
-========================== */
+========================================================= */
 
 .topbar{
-
     position:sticky;
-
     top:0;
-
     z-index:999;
-
     background:rgba(255,255,255,.72);
-
     backdrop-filter:blur(18px);
-
     -webkit-backdrop-filter:blur(18px);
-
     border-bottom:1px solid rgba(255,255,255,.35);
-
 }
 
 .topbar .container{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     padding:18px 0;
-
 }
 
-/* ==========================
+
+/* =========================================================
    LOGO
-========================== */
+========================================================= */
 
 .logo{
-
     display:flex;
-
     align-items:center;
-
     gap:12px;
-
     font-size:30px;
-
     font-weight:700;
-
     color:#2563EB;
-
+    filter:drop-shadow(0 0 12px rgba(37,99,235,.20));
 }
 
 .logo span{
-
     color:#111827;
-
 }
 
 .site-logo{
-
     width:48px;
-
     height:48px;
-
     border-radius:12px;
-
     animation:floatingLogo 4s ease-in-out infinite;
-
 }
 
 @keyframes floatingLogo{
 
     0%{
-
         transform:translateY(0);
-
     }
 
     50%{
-
         transform:translateY(-6px);
-
     }
 
     100%{
-
         transform:translateY(0);
-
     }
 
 }
 
-/* ==========================
+
+/* =========================================================
    NAVIGATION
-========================== */
+========================================================= */
 
 nav{
-
     display:flex;
-
     align-items:center;
-
     gap:32px;
-
 }
 
 nav a{
-
     text-decoration:none;
-
     color:#475569;
-
     font-weight:600;
-
     transition:.3s;
-
     position:relative;
-
 }
 
 nav a::after{
-
     content:"";
-
     position:absolute;
-
     left:0;
-
     bottom:-6px;
-
     width:0;
-
     height:3px;
-
     border-radius:10px;
-
     background:#2563EB;
-
     transition:.3s;
-
 }
 
 nav a:hover{
-
     color:#2563EB;
-
 }
 
 nav a:hover::after{
-
     width:100%;
-
 }
 
-/* ==========================
+nav a.active{
+    color:#2563EB;
+}
+
+nav a.active::after{
+    width:100%;
+}
+
+
+/* =========================================================
    HERO
-========================== */
+========================================================= */
 
 .hero{
     padding:70px 0 45px;
@@ -291,7 +214,6 @@ nav a:hover::after{
     display:flex;
     align-items:center;
     justify-content:center;
-    min-height:auto;
 }
 
 .hero .container{
@@ -339,677 +261,640 @@ nav a:hover::after{
     margin:0 auto;
 }
 
-/* ==========================
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
+
+.hero-buttons{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+.hero-btn,
+.hero-btn-outline{
+    padding:14px 30px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.35s;
+}
+
+.hero-btn{
+    background:#2563EB;
+    color:white;
+}
+
+.hero-btn-outline{
+    border:2px solid #2563EB;
+    color:#2563EB;
+}
+
+.hero-btn:hover,
+.hero-btn-outline:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(37,99,235,.25);
+}
+
+.hero-btn-outline:hover{
+    background:#2563EB;
+    color:white;
+}
+
+.powered-by{
+    margin-top:28px;
+    text-align:center;
+    font-size:16px;
+    color:#64748B;
+    letter-spacing:.5px;
+}
+
+.powered-by strong{
+    color:#2563EB;
+    font-weight:700;
+}
+
+
+/* =========================================================
    STATS
-========================== */
+========================================================= */
 
 .stats{
-
-    margin: 40px 0 70px;
-
-
+    margin:40px 0 70px;
 }
 
 .stats .container{
-
     display:grid;
-
     grid-template-columns:repeat(4,1fr);
-
     gap:25px;
-
 }
 
 .stat-box{
-
     background:rgba(255,255,255,.75);
-
     backdrop-filter:blur(18px);
-
     border:1px solid rgba(255,255,255,.45);
-
     border-radius:22px;
-
     padding:35px;
-
     text-align:center;
-
     box-shadow:0 12px 30px rgba(0,0,0,.06);
-
     transition:.35s;
-
 }
 
 .stat-box:hover{
-
     transform:translateY(-10px);
-
     box-shadow:0 22px 45px rgba(37,99,235,.16);
-
 }
 
 .stat-box h2{
-
     color:#2563EB;
-
     margin-bottom:10px;
     font-size:58px;
-
-    
-
     font-weight:800;
     letter-spacing:-2px;
-
+    animation:zoomStat 1s ease;
 }
 
 .stat-box p{
-
     color:#64748B;
+    font-size:18px;
+}
 
-     font-size:18px;
+@keyframes zoomStat{
+
+    0%{
+        opacity:0;
+        transform:scale(.7);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1);
+    }
 
 }
+
+
 /* =========================================================
-   PART 2
-   Upload • Buttons • Features • Footer
+   TECH STACK
 ========================================================= */
 
-/* ==========================
+.tech-stack{
+    padding:70px 0;
+    text-align:center;
+}
+
+.tech-stack h2{
+    margin-bottom:35px;
+    color:#111827;
+}
+
+.tech-grid{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+.tech-box{
+    background:white;
+    padding:14px 25px;
+    border-radius:40px;
+    font-weight:600;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.tech-box:hover{
+    transform:translateY(-5px);
+    background:#2563EB;
+    color:white;
+}
+
+
+/* =========================================================
    UPLOAD SECTION
-========================== */
+========================================================= */
 
 .upload-section{
-
-    margin:80px 0;
-    margin-top:70px;
-
+    margin:70px 0 80px;
 }
 
 .upload-grid{
-
     display:grid;
-
     grid-template-columns:repeat(2,1fr);
-
     gap:30px;
-
+    align-items:stretch;
 }
 
-.upload-card{
 
+/* =========================================================
+   UPLOAD CARDS
+========================================================= */
+
+.upload-card{
     position:relative;
 
     background:rgba(255,255,255,.82);
 
     backdrop-filter:blur(20px);
-
     -webkit-backdrop-filter:blur(20px);
 
     border:1px solid rgba(255,255,255,.55);
 
     border-radius:28px;
 
-    padding:40px;
+    padding:35px;
 
+    min-height:430px;
 
     box-shadow:0 15px 40px rgba(37,99,235,.10);
-      min-height:480px;
 
     display:flex;
-
     flex-direction:column;
-
     justify-content:space-between;
 
+    transition:.35s;
 }
+
 .upload-card:hover{
-    transform:translateY(-12px) scale(1.02);
+    transform:translateY(-10px);
     box-shadow:0 24px 45px rgba(37,99,235,.18);
 }
 
+.speech-card{
+    min-height:480px;
+    height:480px;
+}
+
 .upload-card h2{
-    color:#0F172A;
-    font-size:44px;
-    font-weight:800;
+    color:#0F172A !important;
+    font-size:38px;
+    font-weight:700;
     margin-bottom:18px;
 }
 
 .upload-card p{
-
-    color:#64748B !important;
-
+    color:#475569 !important;
     font-size:18px;
-
-    line-height:1.6;
-
+    line-height:1.7;
 }
 
-/* ==========================
+
+/* =========================================================
    FILE INPUT
-========================== */
+========================================================= */
 
 input[type=file]{
-
     width:100%;
-
     padding:18px;
-
     border:2px dashed #CBD5E1;
-
     border-radius:16px;
-
     background:#F8FAFC;
-
     cursor:pointer;
-
     margin-bottom:20px;
-
     transition:.3s;
-
 }
 
 input[type=file]:hover{
-
     border-color:#2563EB;
-
     background:#EEF4FF;
-
 }
 
 input[type=file]::file-selector-button{
-
     background:#2563EB;
-
     color:white;
-
     border:none;
-
     padding:10px 20px;
-
     border-radius:10px;
-
     cursor:pointer;
-
     font-weight:600;
-
     margin-right:15px;
-
 }
 
-/* ==========================
-   BUTTONS
-========================== */
+
+/* =========================================================
+   GLOBAL BUTTONS
+========================================================= */
 
 button{
-
     background:linear-gradient(135deg,#2563EB,#7C3AED);
-
-    color:white;
-
+    color:white !important;
     border:none;
-
     border-radius:14px;
-
     padding:14px 30px;
-
     cursor:pointer;
-
     font-size:16px;
-
     font-weight:600;
-
     transition:.35s;
-
     position:relative;
-
     overflow:hidden;
-
 }
 
 button:hover{
-
     transform:translateY(-4px);
-
     box-shadow:0 15px 35px rgba(37,99,235,.25);
-
 }
 
 button::after{
-
     content:"";
-
     position:absolute;
-
     width:0;
-
     height:0;
-
     background:rgba(255,255,255,.35);
-
     border-radius:50%;
-
     top:50%;
-
     left:50%;
-
     transform:translate(-50%,-50%);
-
     transition:.5s;
-
 }
 
 button:hover::after{
-
     width:320px;
-
     height:320px;
-
 }
 
-/* ==========================
+.upload-card button{
+    display:block;
+    margin:25px auto 0;
+}
+
+
+/* =========================================================
+   SPEECH TO TEXT - SIDE BY SIDE BUTTONS
+========================================================= */
+
+.speech-card form{
+    width:100%;
+    margin:0;
+}
+
+/* Keep Upload Audio + Start Recording on same row */
+.speech-card .speech-actions{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:18px;
+    width:100%;
+    margin-top:10px;
+}
+
+.speech-card .speech-actions button{
+    flex:1;
+    min-width:0;
+    margin:0;
+    padding:15px 20px;
+}
+
+/* Recording button */
+#recordBtn{
+    margin:0;
+    min-width:0;
+}
+
+/* Speech result */
+#speechResult{
+    margin-top:20px;
+    color:#475569;
+    font-size:17px;
+    line-height:1.6;
+    text-align:left;
+}
+
+#speechResult b{
+    color:#2563EB;
+}
+
+
+
+
+/* =========================================================
    FEATURES
-========================== */
+========================================================= */
 
 .features{
-
     padding:80px 0;
-
 }
 
 .features h2{
-
     text-align:center;
-
     font-size:40px;
-
-  
-
     color:#111827;
-      
-
     margin-bottom:50px;
-
 }
 
 .feature-grid{
-
     display:grid;
-
     grid-template-columns:repeat(3,1fr);
-
     gap:28px;
-
 }
 
 .feature-box{
-
     background:rgba(255,255,255,.75);
-
     backdrop-filter:blur(18px);
-
     border:1px solid rgba(255,255,255,.45);
-
     border-radius:22px;
-
     padding:35px;
-
     text-align:center;
-
     transition:.35s;
-
     box-shadow:0 12px 30px rgba(0,0,0,.06);
-
 }
 
 .feature-box:hover{
-
-   transform:translateY(-12px) scale(1.03);
-
+    transform:translateY(-12px) scale(1.03);
     box-shadow:0 22px 45px rgba(37,99,235,.14);
-
 }
 
 .icon{
-
     font-size:46px;
-
     margin-bottom:18px;
-
 }
 
 .feature-box h3{
-
     color:#2563EB;
-
     font-size:24px;
-
     margin-bottom:15px;
-
 }
 
 .feature-box p{
-
     color:#64748B;
-
     line-height:1.7;
-
 }
 
-/* ==========================
+
+/* =========================================================
    FOOTER
-========================== */
+========================================================= */
 
 footer{
-
-    margin-top:40px;
-
+    margin-top:80px;
     padding:50px 20px;
     text-align:center;
-     background:rgba(255,255,255,.75);
-
+    background:rgba(255,255,255,.75);
     backdrop-filter:blur(18px);
-
     border-top:1px solid rgba(255,255,255,.5);
-
-}
-
-.footer-logo{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:15px;
-
-    margin-bottom:18px;
-
-}
-
-.footer-img{
-
-    width:55px;
-
-    border-radius:14px;
-
 }
 
 footer h3{
-
     color:#2563EB;
-
     margin-bottom:10px;
-
 }
 
 footer p{
-
     color:#64748B;
-
+    font-size:15px;
     line-height:1.8;
-
 }
+
+.footer-links{
+    margin-top:20px;
+}
+
+.footer-links a{
+    color:#2563EB;
+    text-decoration:none;
+    font-weight:600;
+    margin:0 12px;
+}
+
+.footer-links a:hover{
+    color:#1D4ED8;
+    text-decoration:underline;
+}
+
+.copyright{
+    margin-top:20px;
+    color:#94A3B8;
+    font-size:14px;
+}
+
+
 /* =========================================================
-   PART 3
-   Detection Dashboard • Result • Charts • Audio
+   DASHBOARD
 ========================================================= */
 
-/* ==========================
-   DASHBOARD HEADER
-========================== */
-
 .dashboard-header{
-
     text-align:center;
-
     margin:50px 0;
-
 }
 
 .dashboard-header h1{
-
     font-size:42px;
-
     color:#2563EB;
-
     margin-bottom:12px;
-
     font-weight:700;
-
 }
 
 .dashboard-header p{
-
     color:#64748B;
-
     font-size:18px;
-
 }
 
-/* ==========================
+
+/* =========================================================
    SUMMARY CARDS
-========================== */
+========================================================= */
 
 .summary-grid{
-
     display:grid;
-
     grid-template-columns:repeat(4,1fr);
-
     gap:25px;
-
     margin:50px 0;
-
 }
 
 .summary-card{
-
     background:rgba(255,255,255,.78);
-
     backdrop-filter:blur(18px);
-
     border:1px solid rgba(255,255,255,.45);
-
     border-radius:22px;
-
     padding:30px;
-
     text-align:center;
-
     box-shadow:0 12px 30px rgba(0,0,0,.06);
-
     transition:.35s;
-
 }
 
 .summary-card:hover{
-
     transform:translateY(-8px);
-
     box-shadow:0 22px 45px rgba(37,99,235,.15);
-
 }
 
 .summary-card h2{
-
     font-size:46px;
-
     color:#2563EB;
-
 }
 
 .summary-card p{
-
     margin-top:12px;
-
     color:#64748B;
-
 }
 
-/* ==========================
+
+/* =========================================================
    RESULT IMAGE
-========================== */
+========================================================= */
 
 .result-image-card{
-
     background:rgba(255,255,255,.78);
-
     backdrop-filter:blur(18px);
-
     border-radius:22px;
-
     padding:30px;
-
     margin:45px 0;
-
     text-align:center;
-
     box-shadow:0 12px 30px rgba(0,0,0,.06);
-
 }
 
 .result-image-card h2{
-
     color:#2563EB;
-
     margin-bottom:20px;
-
 }
 
 .result-image{
-
     width:100%;
-
     max-width:850px;
-
     margin:auto;
-
     border-radius:18px;
-
-    transition:.4s;
-
+    animation:imageFade .8s ease;
 }
 
 .result-image:hover{
-
     transform:scale(1.02);
+}
+
+@keyframes imageFade{
+
+    from{
+        opacity:0;
+        transform:scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
 
 }
 
-/* ==========================
+
+/* =========================================================
    AI CAPTION
-========================== */
+========================================================= */
 
 .caption-card{
-
     background:rgba(255,255,255,.78);
-
     backdrop-filter:blur(18px);
-
     border-left:6px solid #2563EB;
-
     border-radius:22px;
-
     padding:30px;
-
     margin:40px 0;
-
     box-shadow:0 12px 30px rgba(0,0,0,.06);
-
 }
 
 .caption-card h2{
-
     color:#2563EB;
-
     margin-bottom:18px;
-
 }
 
 .caption-text{
-
     color:#475569;
-
     font-size:18px;
-
     line-height:1.8;
-
 }
 
-/* ==========================
+
+/* =========================================================
    ANALYTICS
-========================== */
+========================================================= */
 
 .analytics-section{
-
     margin:60px 0;
-
 }
 
 .analytics-section h2{
-
     text-align:center;
-
     color:#2563EB;
-
     margin-bottom:35px;
-
 }
 
 .chart-grid{
-
     display:grid;
-
     grid-template-columns:repeat(2,1fr);
-
     gap:30px;
-
 }
 
 .chart-card{
-
     background:rgba(255,255,255,.78);
-
     backdrop-filter:blur(18px);
-
     border-radius:22px;
-
     padding:25px;
-
     text-align:center;
-
     box-shadow:0 12px 30px rgba(0,0,0,.06);
-
     transition:.35s;
-
 }
 
 .chart-card:hover{
-
     transform:translateY(-8px);
-
 }
 
 .chart-card h3{
-
     color:#2563EB;
-
     margin-bottom:20px;
-
 }
 
 .chart-image{
-
     width:100%;
-
     border-radius:16px;
-
+    transition:.35s;
 }
 
-/* ==========================
-   AUDIO / ASK AI / VOICE
-========================== */
+.chart-image:hover{
+    transform:scale(1.03);
+}
+
+
+/* =========================================================
+   ASK AI / VOICE / DOWNLOAD CARDS
+========================================================= */
 
 .audio-card,
 .ask-card,
@@ -1030,269 +915,517 @@ footer p{
     text-align:center;
 
     box-shadow:0 12px 30px rgba(0,0,0,.06);
-
 }
 
 .audio-card h2,
 .ask-card h2,
 .voice-card h2{
-
     color:#2563EB;
-
     margin-bottom:20px;
-
 }
 
 audio{
-
     width:100%;
-
     margin-top:18px;
-
     border-radius:12px;
-
 }
 
 #question{
-
     width:100%;
-
     padding:16px;
-
     border:2px solid #CBD5E1;
-
     border-radius:12px;
-
     font-size:16px;
-
     transition:.3s;
-
 }
 
 #question:focus{
-
     outline:none;
-
     border-color:#2563EB;
-
     box-shadow:0 0 0 4px rgba(37,99,235,.10);
-
 }
 
-/* ==========================
+
+/* =========================================================
+   ASK AI BUTTON
+========================================================= */
+
+.ask-card button{
+    min-width:190px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin:22px auto 0;
+}
+
+
+/* =========================================================
+   VOICE QUESTION BUTTON
+========================================================= */
+
+.voice-card button{
+    min-width:240px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin:10px auto 20px;
+}
+
+
+/* =========================================================
    TABLE
-========================== */
+========================================================= */
 
 table{
-
     width:100%;
-
     border-collapse:collapse;
-
     overflow:hidden;
-
     border-radius:18px;
-
     background:white;
-
     margin:35px 0;
-
     box-shadow:0 12px 30px rgba(0,0,0,.06);
-
 }
 
 th{
-
     background:#2563EB;
-
     color:white;
-
     padding:16px;
-
 }
 
 td{
-
     padding:15px;
-
     border-bottom:1px solid #E5E7EB;
-
 }
 
 tbody tr:nth-child(even){
-
     background:#F8FAFC;
-
 }
 
 tbody tr:hover{
-
     background:#EEF4FF;
-
 }
 
-/* ==========================
-   HORIZONTAL LINE
-========================== */
 
-hr{
-
-    border:none;
-
-    height:1px;
-
-    background:#E2E8F0;
-
-    margin:45px 0;
-
-}
 /* =========================================================
-   PART 4A
-   Loading • Dark Mode • Cursor • Animations
+   ABOUT TRACKING
 ========================================================= */
 
-/* ==========================
-   LOADING SCREEN
-========================== */
-
-#loader{
-
-    position:fixed;
-
-    inset:0;
-
-    background:#F7F9FC;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:99999;
-
-    transition:.8s;
-
+.tracking-about,
+.about-card{
+    background:rgba(255,255,255,.78);
+    backdrop-filter:blur(18px);
+    border-left:6px solid #2563EB;
+    border-radius:22px;
+    padding:35px;
+    margin:40px 0;
+    box-shadow:0 12px 30px rgba(0,0,0,.06);
 }
 
-.loader-content{
+.tracking-about h2,
+.about-card h2{
+    color:#2563EB;
+}
+
+
+/* =========================================================
+   RESULT PAGE BUTTONS
+========================================================= */
+
+/*
+   IMPORTANT:
+   Existing links/routes remain unchanged.
+   Only their appearance is changed.
+*/
+
+.download-card,
+.back-card,
+.result-actions,
+.tracking-actions,
+.download-actions{
 
     text-align:center;
 
 }
 
+
+/* Main action links */
+
+.download-card a,
+.back-card a,
+.result-actions a,
+.tracking-actions a,
+.download-actions a{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    min-width:240px;
+
+    padding:16px 28px;
+
+    margin:10px;
+
+    border:none;
+
+    border-radius:16px;
+
+    color:white !important;
+
+    text-decoration:none !important;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    box-shadow:0 12px 28px rgba(37,99,235,.18);
+
+    transition:.3s;
+
+}
+
+
+/* Blue */
+
+.download-card a:first-child,
+.result-actions a:first-child,
+.tracking-actions a:first-child,
+.download-actions a:first-child{
+
+    background:linear-gradient(
+        135deg,
+        #2563EB,
+        #3B82F6
+    );
+
+}
+
+
+/* Purple */
+
+.download-card a:nth-child(2),
+.result-actions a:nth-child(2),
+.tracking-actions a:nth-child(2),
+.download-actions a:nth-child(2){
+
+    background:linear-gradient(
+        135deg,
+        #6D28D9,
+        #8B5CF6
+    );
+
+}
+
+
+/* Green */
+
+.download-card a:nth-child(3),
+.result-actions a:nth-child(3),
+.tracking-actions a:nth-child(3),
+.download-actions a:nth-child(3){
+
+    background:linear-gradient(
+        135deg,
+        #059669,
+        #10B981
+    );
+
+}
+
+
+/* Hover */
+
+.download-card a:hover,
+.back-card a:hover,
+.result-actions a:hover,
+.tracking-actions a:hover,
+.download-actions a:hover{
+
+    transform:translateY(-5px);
+
+    color:white !important;
+
+    text-decoration:none !important;
+
+    box-shadow:
+        0 18px 38px
+        rgba(37,99,235,.25);
+
+}
+
+
+/* =========================================================
+   HR
+========================================================= */
+
+hr{
+    border:none;
+    height:1px;
+    background:#E2E8F0;
+    margin:45px 0;
+}
+
+
+/* =========================================================
+   LOADING SCREEN
+========================================================= */
+
+#loader{
+    position:fixed;
+    inset:0;
+    background:#F7F9FC;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    transition:.8s;
+}
+
+.loader-content{
+    text-align:center;
+}
+
 .loader-logo{
-
     width:90px;
-
     animation:logoFloat 3s ease-in-out infinite;
-
 }
 
 .loader-content h2{
-
     margin:20px 0 15px;
-
     color:#2563EB;
-
 }
 
 .loader-content p{
-
     color:#64748B;
-
 }
 
 .loading-bar{
-
     width:260px;
-
     height:8px;
-
     background:#E2E8F0;
-
     border-radius:20px;
-
     overflow:hidden;
-
     margin:auto;
-
 }
 
 .loading-fill{
-
     width:0;
-
     height:100%;
-
     background:linear-gradient(90deg,#2563EB,#7C3AED);
-
     animation:loading 2s forwards;
-
 }
 
 @keyframes loading{
 
     from{
-
         width:0;
-
     }
 
     to{
-
         width:100%;
-
     }
 
 }
 
-@keyframes logoFloat{
+
+/* =========================================================
+   CURSOR GLOW
+========================================================= */
+
+#cursorGlow{
+    position:fixed;
+    width:240px;
+    height:240px;
+    border-radius:50%;
+    pointer-events:none;
+    background:
+        radial-gradient(
+            circle,
+            rgba(37,99,235,.18),
+            transparent 70%
+        );
+    transform:translate(-50%,-50%);
+    z-index:-1;
+}
+
+
+/* =========================================================
+   FLOATING ICONS
+========================================================= */
+
+.floating-icons{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-2;
+}
+
+.floating-icons span{
+    position:absolute;
+    font-size:34px;
+    opacity:.08;
+    animation:floatIcon 12s ease-in-out infinite;
+}
+
+.floating-icons span:nth-child(1){
+    top:12%;
+    left:8%;
+}
+
+.floating-icons span:nth-child(2){
+    top:20%;
+    right:12%;
+    animation-delay:2s;
+}
+
+.floating-icons span:nth-child(3){
+    bottom:20%;
+    left:12%;
+    animation-delay:4s;
+}
+
+.floating-icons span:nth-child(4){
+    bottom:12%;
+    right:15%;
+    animation-delay:6s;
+}
+
+.floating-icons span:nth-child(5){
+    top:50%;
+    left:50%;
+    animation-delay:8s;
+}
+
+@keyframes floatIcon{
 
     0%{
-
-        transform:translateY(0);
-
+        transform:translateY(0) rotate(0);
     }
 
     50%{
-
-        transform:translateY(-8px);
-
+        transform:translateY(-18px) rotate(10deg);
     }
 
     100%{
-
-        transform:translateY(0);
-
+        transform:translateY(0) rotate(0);
     }
 
 }
 
-/* ==========================
+
+/* =========================================================
+   FADE
+========================================================= */
+
+.fade-up{
+    animation:fadeUp .8s ease;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#EEF2FF;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#2563EB;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#1D4ED8;
+}
+
+
+/* =========================================================
+   SCROLL TO TOP
+========================================================= */
+
+#topBtn{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    border:none;
+    background:linear-gradient(135deg,#2563EB,#7C3AED);
+    color:white;
+    font-size:22px;
+    cursor:pointer;
+    display:none;
+    z-index:999;
+    box-shadow:0 10px 25px rgba(37,99,235,.25);
+}
+
+#topBtn:hover{
+    transform:translateY(-5px);
+}
+
+
+/* =========================================================
+   IMAGES
+========================================================= */
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection{
+    background:#2563EB;
+    color:white;
+}
+
+
+/* =========================================================
    DARK MODE
-========================== */
+========================================================= */
 
 .dark{
-
     background:#0F172A;
-
     color:white;
-
 }
 
 .dark body{
-
     background:#0F172A;
-
 }
 
 .dark .topbar{
-
     background:rgba(15,23,42,.90);
-
     border-bottom:1px solid rgba(255,255,255,.08);
-
 }
 
 .dark .upload-card,
@@ -1304,719 +1437,2044 @@ hr{
 .dark .ask-card,
 .dark .voice-card,
 .dark .result-image-card,
-.dark .stat-box{
-
+.dark .stat-box,
+.dark .tracking-about,
+.dark .about-card{
     background:rgba(30,41,59,.88);
-
     color:white;
-
     border:1px solid rgba(255,255,255,.08);
-
 }
 
 .dark p{
-
     color:#CBD5E1;
-
 }
 
 .dark h1,
 .dark h2,
 .dark h3{
-
     color:white;
-
 }
 
 .dark table{
-
     background:#1E293B;
-
     color:white;
-
 }
 
 .dark td{
-
     border-color:#334155;
-
 }
 
 .dark th{
-
     background:#2563EB;
-
 }
 
-/* ==========================
-   CURSOR GLOW
-========================== */
-
-#cursorGlow{
-
-    position:fixed;
-
-    width:240px;
-
-    height:240px;
-
-    border-radius:50%;
-
-    pointer-events:none;
-
-    background:
-
-    radial-gradient(circle,
-
-    rgba(37,99,235,.18),
-
-    transparent 70%);
-
-    transform:translate(-50%,-50%);
-
-    z-index:-1;
-
-}
-
-/* ==========================
-   FLOATING AI ICONS
-========================== */
-
-.floating-icons{
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:-2;
-
-}
-
-.floating-icons span{
-
-    position:absolute;
-
-    font-size:34px;
-
-    opacity:.08;
-
-    animation:floatIcon 12s ease-in-out infinite;
-
-}
-
-.floating-icons span:nth-child(1){
-
-    top:12%;
-
-    left:8%;
-
-}
-
-.floating-icons span:nth-child(2){
-
-    top:20%;
-
-    right:12%;
-
-    animation-delay:2s;
-
-}
-
-.floating-icons span:nth-child(3){
-
-    bottom:20%;
-
-    left:12%;
-
-    animation-delay:4s;
-
-}
-
-.floating-icons span:nth-child(4){
-
-    bottom:12%;
-
-    right:15%;
-
-    animation-delay:6s;
-
-}
-
-.floating-icons span:nth-child(5){
-
-    top:50%;
-
-    left:50%;
-
-    animation-delay:8s;
-
-}
-
-@keyframes floatIcon{
-
-    0%{
-
-        transform:translateY(0) rotate(0);
-
-    }
-
-    50%{
-
-        transform:translateY(-18px) rotate(10deg);
-
-    }
-
-    100%{
-
-        transform:translateY(0) rotate(0);
-
-    }
-
-}
-
-/* ==========================
-   FADE ANIMATION
-========================== */
-
-.fade-up{
-
-    animation:fadeUp .8s ease;
-
-}
-
-@keyframes fadeUp{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(25px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/* ==========================
-   SCROLLBAR
-========================== */
-
-::-webkit-scrollbar{
-
-    width:10px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:#EEF2FF;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#2563EB;
-
-    border-radius:20px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:#1D4ED8;
-
-}
 
 /* =========================================================
-   PART 4B
-   Responsive • Scroll To Top • Final Polish
+   RESPONSIVE
 ========================================================= */
 
-/* ==========================
-   SCROLL TO TOP
-========================== */
-
-#topBtn{
-
-    position:fixed;
-
-    bottom:25px;
-
-    right:25px;
-
-    width:55px;
-
-    height:55px;
-
-    border-radius:50%;
-
-    border:none;
-
-    background:linear-gradient(135deg,#2563EB,#7C3AED);
-
-    color:white;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    display:none;
-
-    z-index:999;
-
-    box-shadow:0 10px 25px rgba(37,99,235,.25);
-
-}
-
-#topBtn:hover{
-
-    transform:translateY(-5px);
-
-}
-
-/* ==========================
-   HOVER EFFECTS
-========================== */
-
-.upload-card:hover,
-.feature-box:hover,
-.summary-card:hover,
-.chart-card:hover,
-.caption-card:hover,
-.audio-card:hover,
-.ask-card:hover,
-.voice-card:hover,
-.download-card:hover,
-.result-image-card:hover{
-
-    transform:translateY(-10px);
-
-    box-shadow:0 22px 45px rgba(37,99,235,.18);
-
-}
-
-.result-image:hover{
-
-    transform:scale(1.02);
-
-}
-
-.chart-image{
-
-    transition:.35s;
-
-}
-
-.chart-image:hover{
-
-    transform:scale(1.03);
-
-}
-
-/* ==========================
-   SELECTION
-========================== */
-
-::selection{
-
-    background:#2563EB;
-
-    color:white;
-
-}
-
-/* ==========================
-   IMAGES
-========================== */
-
-img{
-
-    max-width:100%;
-
-    display:block;
-
-}
-
-/* ==========================
-   SMOOTH TRANSITION
-========================== */
-
-*{
-
-    transition:
-
-    background .3s,
-
-    color .3s,
-
-    border-color .3s,
-
-    box-shadow .3s,
-
-    transform .3s;
-
-}
-/* ==========================
-   RESPONSIVE
-========================== */
 @media(max-width:1100px){
-.stats .container{
-grid-template-columns:repeat(2,1fr);
+
+    .stats .container{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .summary-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .feature-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .upload-grid{
+        grid-template-columns:1fr;
+    }
+
+    .chart-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:52px;
+    }
+
 }
-.summary-grid{
-grid-template-columns:repeat(2,1fr);
-}
-.feature-grid{
-grid-template-columns:repeat(2,1fr);
-}
-.upload-grid{
-grid-template-columns:1fr;
-}
-.chart-grid{
-grid-template-columns:1fr;
-}
-.hero h1{
-font-size:52px;
-}
-}
+
+
 @media(max-width:768px){
-.container{
-width:94%;
-}
-.topbar .container{
-flex-direction:column;
-gap:18px;
-}
-nav{
-flex-wrap:wrap;
-justify-content:center;
-gap:18px;
-}
-.hero{
 
-min-height:70vh;
+    .container{
+        width:94%;
+    }
 
-    padding:70px 0 40px;
+    .topbar .container{
+        flex-direction:column;
+        gap:18px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:18px;
+    }
+
+    .hero{
+        min-height:70vh;
+        padding:70px 0 40px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .stats .container,
+    .summary-grid,
+    .feature-grid,
+    .chart-grid{
+        grid-template-columns:1fr;
+    }
+
+    button{
+        width:100%;
+    }
+
+    .upload-card{
+        padding:40px;
+    }
+
+    .result-image{
+        width:100%;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+        width:100%;
+        max-width:320px;
+    }
+
+    .hero-btn,
+    .hero-btn-outline{
+        width:100%;
+        text-align:center;
+    }
+
+    .download-card a,
+    .back-card a,
+    .result-actions a,
+    .tracking-actions a,
+    .download-actions a{
+        width:100%;
+        max-width:320px;
+        margin:8px auto;
+    }
+
 }
-.hero h1{
-font-size:38px;
-}
-.hero p{
-font-size:16px;
-}
-.stats .container,
-.summary-grid,
-.feature-grid,
-.chart-grid{
-grid-template-columns:1fr;
-}
-button{
-width:100%;
-}
-.upload-card{
-padding:40px;
-}
-.result-image{
-width:100%;
-}
-}
+
+
 @media(max-width:480px){
-.hero h1{
-font-size:30px;
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    .tag{
+        font-size:12px;
+        padding:8px 16px;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .site-logo{
+        width:40px;
+        height:40px;
+    }
+
+    .upload-card h2{
+        font-size:30px;
+    }
+
 }
-.tag{
-font-size:12px;
-padding:8px 16px;
+/* =========================================================
+   FINAL RESULT PAGE BUTTON FIX
+   Download / Report / Another buttons
+========================================================= */
+
+/* Buttons inside result action cards */
+
+.download-card button,
+.back-card button,
+.result-actions button,
+.tracking-actions button,
+.download-actions button{
+
+    min-width:240px !important;
+
+    padding:16px 28px !important;
+
+    margin:10px !important;
+
+    border:none !important;
+
+    border-radius:16px !important;
+
+    color:white !important;
+
+    font-size:16px !important;
+
+    font-weight:700 !important;
+
+    cursor:pointer !important;
+
+    display:inline-flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    gap:8px !important;
+
+    box-shadow:
+        0 12px 28px
+        rgba(37,99,235,.18) !important;
+
+    transition:.35s !important;
+
 }
-.logo{
-font-size:22px;
+
+
+/* 🔵 First button */
+
+.download-card button:first-of-type,
+.result-actions button:first-of-type,
+.tracking-actions button:first-of-type,
+.download-actions button:first-of-type{
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563EB,
+            #3B82F6
+        ) !important;
+
 }
-.site-logo{
-width:40px;
-height:40px;
+
+
+/* 🟣 Second button */
+
+.download-card button:nth-of-type(2),
+.result-actions button:nth-of-type(2),
+.tracking-actions button:nth-of-type(2),
+.download-actions button:nth-of-type(2){
+
+    background:
+        linear-gradient(
+            135deg,
+            #6D28D9,
+            #8B5CF6
+        ) !important;
+
 }
+
+
+/* 🟢 Third button */
+
+.download-card button:nth-of-type(3),
+.result-actions button:nth-of-type(3),
+.tracking-actions button:nth-of-type(3),
+.download-actions button:nth-of-type(3){
+
+    background:
+        linear-gradient(
+            135deg,
+            #059669,
+            #10B981
+        ) !important;
+
 }
-/* ==========================
-   FINAL POLISH
-========================== */
-.logo{
-filter:drop-shadow(0 0 12px rgba(37,99,235,.20));
+
+
+/* Hover */
+
+.download-card button:hover,
+.back-card button:hover,
+.result-actions button:hover,
+.tracking-actions button:hover,
+.download-actions button:hover{
+
+    transform:translateY(-5px) !important;
+
+    box-shadow:
+        0 18px 38px
+        rgba(37,99,235,.28) !important;
+
 }
-.stat-box h2{
-animation:zoomStat 1s ease;
+
+
+/* Remove old ripple size problem */
+
+.download-card button::after,
+.back-card button::after,
+.result-actions button::after,
+.tracking-actions button::after,
+.download-actions button::after{
+
+    width:0 !important;
+
+    height:0 !important;
+
 }
-@keyframes zoomStat{
-0%{
-opacity:0;
-transform:scale(.7);
+
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .download-card button,
+    .back-card button,
+    .result-actions button,
+    .tracking-actions button,
+    .download-actions button{
+
+        width:100% !important;
+
+        max-width:320px !important;
+
+        margin:8px auto !important;
+
+    }
+
 }
-100%{
-opacity:1;
-transform:scale(1);
+/* ==============================
+   SPEECH BUTTONS PARALLEL
+============================== */
+
+#uploadSpeechForm{
+    width:100%;
 }
+
+#uploadSpeechForm button{
+    width:calc(50% - 8px);
+    display:inline-block;
+    margin:0;
 }
-.feature-box h3{
-font-size:24px;
+
+#recordBtn{
+    width:calc(50% - 8px);
+    display:inline-block;
+    margin:0 0 0 12px;
 }
-.feature-box p{
-line-height:1.7;
+
+@media(max-width:768px){
+    #uploadSpeechForm button,
+    #recordBtn{
+        width:100%;
+        margin:8px 0;
+    }
 }
-.result-image{
-animation:imageFade .8s ease;
+/* =========================================================
+   FINAL FIX - ALL 4 UPLOAD CARDS SAME SIZE
+========================================================= */
+
+.upload-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:30px;
+    align-items:stretch;
 }
-@keyframes imageFade{
-from{
-opacity:0;
-transform:scale(.96);
+
+/* ALL FOUR CARDS SAME HEIGHT */
+.upload-card{
+    width:100%;
+    min-height:480px;
+    height:480px;
+
+    padding:35px;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    position:relative;
+
+    background:rgba(255,255,255,.82);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.55);
+
+    border-radius:28px;
+
+    box-shadow:0 15px 40px rgba(37,99,235,.10);
+
+    box-sizing:border-box;
 }
-to{
-opacity:1;
-transform:scale(1);
-}
-}
-footer{
-margin-top:80px;
-}
-footer p{
-font-size:15px;
-line-height:1.8;
-}
-/* ==========================
-   END
-========================== */
+
+
+/* SAME HEADING SIZE */
 .upload-card h2{
     color:#0F172A !important;
-    font-size:38px;
+    font-size:38px !important;
     font-weight:700;
+    margin-bottom:18px;
 }
 
+
+/* SAME DESCRIPTION */
 .upload-card p{
     color:#475569 !important;
     font-size:18px;
     line-height:1.7;
 }
 
-.upload-card button{
-    display:block;
-    margin:25px auto 0;
-    color:white !important;
-}      
-.hero-buttons{
-    margin-top:35px;
-    display:flex;
-    justify-content:center;
-    gap:20px;
+
+/* FILE INPUT */
+.upload-card input[type="file"]{
+    width:100%;
+    padding:18px;
+    margin-bottom:20px;
+
+    border:2px dashed #CBD5E1;
+    border-radius:16px;
+
+    background:#F8FAFC;
+
+    box-sizing:border-box;
 }
 
-.hero-btn,
-.hero-btn-outline{
+
+/* BUTTONS */
+.upload-card button{
+    background:linear-gradient(
+        135deg,
+        #2563EB,
+        #7C3AED
+    );
+
+    color:white !important;
+
+    border:none;
+    border-radius:14px;
 
     padding:14px 30px;
-    border-radius:12px;
-    text-decoration:none;
-    font-weight:600;
-    transition:.3s;
 
-}
-
-.hero-btn{
-
-    background:#2563EB;
-    color:white;
-
-}
-
-.hero-btn:hover{
-
-    transform:translateY(-3px);
-
-}
-
-.hero-btn-outline{
-
-    border:2px solid #2563EB;
-    color:#2563EB;
-
-}
-
-.hero-btn-outline:hover{
-
-    background:#2563EB;
-    color:white;
-
-}
-/* ==========================
-   TECH STACK
-========================== */
-
-.tech-stack{
-
-    padding:70px 0;
-
-    text-align:center;
-
-}
-
-.tech-stack h2{
-
-    margin-bottom:35px;
-
-    color:#111827;
-
-}
-
-.tech-grid{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:18px;
-
-    flex-wrap:wrap;
-
-}
-
-.tech-box{
-
-    background:white;
-
-    padding:14px 25px;
-
-    border-radius:40px;
-
-    font-weight:600;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-}
-
-.tech-box:hover{
-
-    transform:translateY(-5px);
-
-    background:#2563EB;
-
-    color:white;
-
-}
-.footer-links{
-
-    margin-top:20px;
-
-}
-
-.footer-links a{
-
-    text-decoration:none;
-
-    color:#2563EB;
-
-    font-weight:600;
-
-    margin:0 10px;
-
-}
-
-.footer-links a:hover{
-
-    text-decoration:underline;
-
-}
-.footer-links{
-
-    margin-top:20px;
-
-}
-
-.footer-links a{
-
-    color:#2563EB;
-
-    text-decoration:none;
-
-    font-weight:600;
-
-    margin:0 12px;
-
-}
-
-.footer-links a:hover{
-
-    color:#1D4ED8;
-
-    text-decoration:underline;
-
-}
-
-.copyright{
-
-    margin-top:20px;
-
-    color:#94A3B8;
-
-    font-size:14px;
-
-}
-/* ==========================
-   POWERED BY
-========================== */
-
-.powered-by{
-
-    margin-top:28px;
-
-    text-align:center;
+    cursor:pointer;
 
     font-size:16px;
-
-    color:#64748B;
-
-    letter-spacing:.5px;
-
-}
-
-.powered-by strong{
-
-    color:#2563EB;
-
-    font-weight:700;
-
-}
-/* ==========================
-   ACTIVE NAVBAR LINK
-========================== */
-
-nav a.active{
-    color:#2563EB;
-}
-
-nav a.active::after{
-    width:100%;
-}
-.hero-btn,
-.hero-btn-outline{
+    font-weight:600;
 
     transition:.35s;
 
+    position:relative;
+    overflow:hidden;
 }
 
-.hero-btn:hover,
-.hero-btn-outline:hover{
 
+/* NORMAL BUTTONS */
+.upload-card form button{
+    display:block;
+    margin:25px auto 0;
+}
+
+
+/* =========================================================
+   SPEECH TO TEXT - TWO BUTTONS SIDE BY SIDE
+========================================================= */
+
+#uploadSpeechForm{
+    width:100%;
+}
+
+
+/* Upload Audio button */
+#uploadSpeechForm button{
+    width:calc(50% - 8px);
+    display:inline-block;
+
+    margin:0;
+
+    vertical-align:middle;
+}
+
+
+/* Start Recording button */
+#recordBtn{
+    width:calc(50% - 8px);
+
+    display:inline-block;
+
+    margin:0 0 0 12px;
+
+    vertical-align:middle;
+}
+
+
+/* Speech result */
+#speechResult{
+    margin-top:20px;
+    min-height:25px;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.upload-card button:hover{
     transform:translateY(-4px);
 
-    box-shadow:0 15px 35px rgba(37,99,235,.25);
+    box-shadow:
+        0 15px 35px
+        rgba(37,99,235,.25);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:1100px){
+
+    .upload-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:768px){
+
+    .upload-card{
+        height:auto;
+        min-height:480px;
+    }
+
+    #uploadSpeechForm button,
+    #recordBtn{
+        width:100%;
+        margin:8px 0;
+    }
+
+}
+/* =========================================================
+   FINAL UPLOAD CARDS FIX
+========================================================= */
+
+.upload-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:30px;
+    align-items:stretch;
+}
+
+
+/* ALL 4 CARDS EXACT SAME SIZE */
+
+.upload-grid > .upload-card{
+
+    width:100%;
+
+    height:480px;
+    min-height:480px;
+
+    padding:35px;
+
+    background:rgba(255,255,255,.82);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.55);
+
+    border-radius:28px;
+
+    box-shadow:0 15px 40px rgba(37,99,235,.10);
+
+    box-sizing:border-box;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+}
+
+
+/* HEADING SAME SIZE */
+
+.upload-grid > .upload-card h2{
+
+    color:#0F172A !important;
+
+    font-size:38px !important;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    margin-bottom:18px;
+
+}
+
+
+/* DESCRIPTION */
+
+.upload-grid > .upload-card p{
+
+    color:#475569 !important;
+
+    font-size:18px;
+
+    line-height:1.7;
+
+}
+
+
+/* =========================================================
+   FILE INPUT
+========================================================= */
+
+.upload-grid input[type="file"]{
+
+    width:100%;
+
+    padding:18px;
+
+    border:2px dashed #CBD5E1;
+
+    border-radius:16px;
+
+    background:#F8FAFC;
+
+    box-sizing:border-box;
+
+    margin:0 0 20px 0;
+
+}
+
+
+/* =========================================================
+   NORMAL CARD BUTTONS
+========================================================= */
+
+.upload-grid > .upload-card form > button{
+
+    display:block;
+
+    margin:25px auto 0;
+
+}
+
+
+/* =========================================================
+   SPEECH
+========================================================= */
+
+.speech-controls{
+
+    width:100%;
+
+}
+
+
+/* speech file form */
+
+#uploadSpeechForm{
+
+    width:100%;
+
+    margin:0;
+
+}
+
+
+/* file input inside speech */
+
+#uploadSpeechForm input[type="file"]{
+
+    margin-bottom:20px;
+
+}
+
+
+/* =========================================================
+   SPEECH BUTTONS PARALLEL
+========================================================= */
+
+.speech-buttons{
+    display:flex !important;
+    gap:18px !important;
+    width:100% !important;
+}
+
+.speech-buttons button{
+    flex:1 !important;
+    width:50% !important;
+    height:58px !important;
+    margin:0 !important;
+    padding:0 10px !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    white-space:nowrap !important;
+    font-size:16px !important;
+    font-weight:600 !important;
+
+    border-radius:14px !important;
+}
+
+
+/* speech result */
+
+#speechResult{
+
+    margin-top:18px;
+
+    min-height:25px;
+
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.upload-grid > .upload-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+        0 22px 45px
+        rgba(37,99,235,.18);
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px){
+
+    .upload-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+@media(max-width:768px){
+
+    .upload-grid > .upload-card{
+
+        height:auto;
+
+        min-height:480px;
+
+    }
+
+    .speech-buttons{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+/* =========================================================
+   SPEECH BUTTONS - FINAL FIX
+========================================================= */
+
+.speech-buttons{
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:18px !important;
+
+    width:100% !important;
+    margin-top:20px;
+
+    align-items:stretch;
+}
+
+.speech-buttons button{
+
+    width:100% !important;
+
+    height:58px !important;
+    min-height:58px !important;
+
+    margin:0 !important;
+    padding:0 12px !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    white-space:nowrap !important;
+
+    font-size:16px !important;
+    font-weight:600 !important;
+
+    line-height:1 !important;
+
+    border:none !important;
+    border-radius:14px !important;
+
+    background:linear-gradient(
+        135deg,
+        #2563EB,
+        #7C3AED
+    ) !important;
+
+    color:white !important;
+
+    box-sizing:border-box !important;
+
+    transform:none;
+}
+
+
+/* hover */
+
+.speech-buttons button:hover{
+
+    transform:translateY(-4px) !important;
+
+    box-shadow:
+        0 15px 35px
+        rgba(37,99,235,.25) !important;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+    .speech-buttons{
+
+        grid-template-columns:1fr !important;
+
+    }
+
+}
+/* =========================================================
+   FINAL 4 UPLOAD CARDS ALIGNMENT
+   All four cards same internal spacing
+========================================================= */
+
+/* Same card size */
+.upload-grid > .upload-card{
+    height:480px !important;
+    min-height:480px !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    justify-content:flex-start !important;
+
+    padding:35px !important;
+}
+
+
+/* Heading */
+.upload-grid > .upload-card h2{
+    margin:0 0 18px 0 !important;
+
+    font-size:38px !important;
+    line-height:1.2 !important;
+}
+
+
+/* Description */
+.upload-grid > .upload-card > div:first-child p{
+    margin:0 !important;
+}
+
+
+/* File section starts at SAME position */
+.upload-grid > .upload-card form{
+    margin-top:48px !important;
+}
+
+
+/* File input */
+.upload-grid > .upload-card input[type="file"]{
+    margin:0 0 20px 0 !important;
+}
+
+
+/* Main buttons */
+.upload-grid > .upload-card form > button{
+    display:block !important;
+
+    margin:25px auto 0 !important;
+}
+
+
+/* =========================================================
+   SPEECH CARD
+========================================================= */
+
+.speech-card{
+    justify-content:flex-start !important;
+}
+
+
+/* Speech file input same vertical position */
+.speech-card .speech-controls{
+    margin-top:48px !important;
+}
+
+
+/* Speech upload form itself should NOT add extra margin */
+.speech-card #uploadSpeechForm{
+    margin-top:0 !important;
+}
+
+
+/* Speech buttons */
+.speech-card .speech-buttons{
+    margin-top:20px !important;
+
+    display:grid !important;
+
+    grid-template-columns:1fr 1fr !important;
+
+    gap:18px !important;
+
+    width:100% !important;
+}
+
+
+/* Both speech buttons equal */
+.speech-card .speech-buttons button{
+    width:100% !important;
+
+    height:58px !important;
+    min-height:58px !important;
+
+    margin:0 !important;
+
+    padding:0 10px !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    white-space:nowrap !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:1100px){
+
+    .upload-grid{
+        grid-template-columns:1fr !important;
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .speech-card .speech-buttons{
+        grid-template-columns:1fr !important;
+    }
+
+}
+/* =========================================================
+   FINAL UPLOAD CARDS - CLEAN ALIGNMENT
+========================================================= */
+
+.upload-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    align-items: stretch;
+}
+
+/* ALL FOUR CARDS SAME SIZE */
+
+.upload-card {
+    position: relative;
+
+    height: 400px !important;
+    min-height: 400px !important;
+
+    padding: 30px 36px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    justify-content: flex-start !important;
+
+    box-sizing: border-box;
+}
+
+/* HEADING */
+
+.upload-card h2 {
+    margin-top: 0 !important;
+    margin-bottom: 14px !important;
+}
+
+/* DESCRIPTION */
+
+.upload-card p {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+}
+
+/* FILE INPUT */
+
+.upload-card input[type="file"] {
+    margin-top: 0 !important;
+    margin-bottom: 18px !important;
+}
+
+/* NORMAL BUTTONS */
+
+.upload-card form > button {
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+/* =========================================================
+   SPEECH TO TEXT
+========================================================= */
+
+.speech-card {
+    height: 400px !important;
+    min-height: 400px !important;
+}
+
+/* Two speech buttons in ONE ROW */
+
+.speech-card .speech-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+
+    gap: 16px !important;
+
+    width: 100% !important;
+
+    margin-top: 0 !important;
+}
+
+/* BOTH BUTTONS SAME SIZE */
+
+.speech-card .speech-buttons button {
+    flex: 1 1 0 !important;
+
+    width: auto !important;
+
+    min-width: 0 !important;
+
+    margin: 0 !important;
+
+    padding: 14px 18px !important;
+}
+
+/* SPEECH RESULT */
+
+.speech-card #speechResult {
+    margin-top: 14px !important;
+}
+
+/* =========================================================
+   REMOVE OLD EXTRA SPACING
+========================================================= */
+
+.upload-card br {
+    display: none !important;
+}
+
+.upload-card hr {
+    display: none !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .upload-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .upload-card,
+    .speech-card {
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    .speech-card .speech-buttons {
+        flex-direction: column !important;
+    }
+
+    .speech-card .speech-buttons button {
+        width: 100% !important;
+    }
+
+}
+/* Reduce bottom white space after action buttons */
+.upload-card {
+    height: 340px !important;
+    min-height: 340px !important;
+}
+
+/* Keep speech card same height */
+.speech-card {
+    height: 340px !important;
+    min-height: 340px !important;
+}
+/* ===== REDUCE SPACE BELOW BUTTONS ===== */
+
+.upload-card {
+    justify-content: flex-start !important;
+}
+
+/* File ke baad button */
+.upload-card form > button {
+    margin-top: 5px !important;
+}
+
+/* Speech ke dono buttons */
+.speech-card .speech-buttons {
+    margin-top: 5px !important;
+}
+
+/* Button ke neeche extra space kam */
+.upload-card {
+    padding-bottom: 15px !important;
+}
+
+/* Same height for all 4 cards */
+.upload-card {
+    justify-content: flex-start !important;
+    padding-bottom: 15px !important;
+}
+
+.upload-card form > button {
+    margin-top: 5px !important;
+}
+
+.speech-card .speech-buttons {
+    margin-top: 5px !important;
+}
+/* ==========================================
+   FINAL UPLOAD CARD SPACING
+========================================== */
+
+.upload-card {
+    height: 380px !important;
+    min-height: 380px !important;
+
+    padding: 28px 36px !important;
+
+    justify-content: flex-start !important;
+}
+
+/* Heading */
+.upload-card h2 {
+    margin-top: 0 !important;
+    margin-bottom: 14px !important;
+}
+
+/* Description */
+.upload-card p {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+}
+
+/* Choose File */
+.upload-card input[type="file"] {
+    margin-top: 0 !important;
+    margin-bottom: 18px !important;
+}
+
+/* Normal buttons */
+.upload-card form > button {
+    margin: 0 auto !important;
+}
+
+/* ==========================================
+   SPEECH TO TEXT
+========================================== */
+
+.speech-card {
+    height: 380px !important;
+    min-height: 380px !important;
+}
+
+/* Two buttons side-by-side */
+.speech-card .speech-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 16px !important;
+    width: 100% !important;
+    margin-top: 0 !important;
+}
+
+.speech-card .speech-buttons button {
+    flex: 1 !important;
+    width: auto !important;
+    margin: 0 !important;
+}
+
+/* Remove unnecessary old spacing */
+.upload-card br {
+    display: none !important;
+}
+
+.upload-card hr {
+    display: none !important;
+}
+/* =========================================================
+   FINAL UPLOAD CARDS ALIGNMENT
+========================================================= */
+
+.upload-section{
+    margin:50px 0 60px !important;
+}
+
+
+/* =========================
+   4 CARD GRID
+========================= */
+
+.upload-grid{
+
+    display:grid !important;
+
+    grid-template-columns:repeat(2, 1fr) !important;
+
+    gap:28px !important;
+
+    align-items:stretch !important;
+
+}
+
+
+/* =========================
+   ALL FOUR CARDS SAME SIZE
+========================= */
+
+.upload-grid .upload-card{
+
+    width:100% !important;
+
+    height:430px !important;
+
+    min-height:430px !important;
+
+    padding:32px 36px 24px !important;
+
+    border-radius:28px !important;
+
+    display:flex !important;
+
+    flex-direction:column !important;
+
+    justify-content:flex-start !important;
+
+    box-sizing:border-box !important;
+
+}
+
+
+/* =========================
+   CARD TOP
+========================= */
+
+.upload-grid .card-top{
+
+    width:100%;
+
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.upload-grid .card-icon{
+
+    width:58px;
+
+    height:58px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:34px;
+
+    margin-bottom:16px;
+
+}
+
+
+/* =========================
+   CARD HEADING
+========================= */
+
+.upload-grid .upload-card h2{
+
+    font-size:38px !important;
+
+    line-height:1.15 !important;
+
+    margin:0 0 16px !important;
+
+    color:#0F172A !important;
+
+    font-weight:800 !important;
+
+}
+
+
+/* =========================
+   CARD DESCRIPTION
+========================= */
+
+.upload-grid .upload-card p{
+
+    font-size:18px !important;
+
+    line-height:1.55 !important;
+
+    color:#475569 !important;
+
+    margin:0 !important;
+
+}
+
+
+/* =========================
+   FORM AREA
+========================= */
+
+.upload-grid .module-form{
+
+    margin-top:auto !important;
+
+    width:100%;
+
+}
+
+
+/* =========================
+   FILE INPUT
+========================= */
+
+.upload-grid .upload-card input[type="file"]{
+
+    width:100% !important;
+
+    height:76px !important;
+
+    padding:17px !important;
+
+    margin:0 0 18px !important;
+
+    border:2px dashed #CBD5E1 !important;
+
+    border-radius:16px !important;
+
+    background:#F8FAFC !important;
+
+    box-sizing:border-box !important;
+
+}
+
+
+/* =========================
+   ALL MAIN BUTTONS
+========================= */
+
+.upload-grid .module-btn{
+
+    height:54px !important;
+
+    min-height:54px !important;
+
+    padding:12px 24px !important;
+
+    border:none !important;
+
+    border-radius:14px !important;
+
+    background:linear-gradient(
+        135deg,
+        #2563EB,
+        #7C3AED
+    ) !important;
+
+    color:white !important;
+
+    font-size:17px !important;
+
+    font-weight:700 !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    white-space:nowrap !important;
+
+}
+
+
+/* =========================
+   NORMAL CARD BUTTON
+========================= */
+
+.upload-grid .module-form > .module-btn{
+
+    width:180px !important;
+
+    margin:0 auto !important;
+
+}
+
+
+/* =========================
+   SPEECH MODULE
+========================= */
+
+.upload-grid .speech-module{
+
+    width:100%;
+
+    margin-top:auto !important;
+
+}
+
+
+/* =========================
+   SPEECH FILE INPUT
+========================= */
+
+.upload-grid .speech-module input[type="file"]{
+
+    margin-bottom:18px !important;
+
+}
+
+
+/* =========================
+   SPEECH TWO BUTTONS
+========================= */
+
+.speech-buttons{
+
+    width:100%;
+
+    display:grid !important;
+
+    grid-template-columns:1fr 1fr !important;
+
+    gap:16px !important;
+
+    align-items:stretch !important;
+
+}
+
+
+/* SAME SIZE SPEECH BUTTONS */
+
+.speech-buttons .module-btn{
+
+    width:100% !important;
+
+    height:54px !important;
+
+    min-height:54px !important;
+
+    margin:0 !important;
+
+}
+
+
+/* =========================
+   SPEECH RESULT
+========================= */
+
+.speech-result{
+
+    min-height:24px;
+
+    margin:10px 0 0 !important;
+
+    color:#475569 !important;
+
+    font-size:16px !important;
+
+}
+
+
+/* =========================
+   CARD HOVER
+========================= */
+
+.upload-grid .upload-card{
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease !important;
+
+}
+
+.upload-grid .upload-card:hover{
+
+    transform:translateY(-8px) !important;
+
+    box-shadow:
+        0 22px 45px
+        rgba(37,99,235,.16) !important;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px){
+
+    .upload-grid{
+
+        grid-template-columns:1fr !important;
+
+    }
+
+}
+
+
+@media(max-width:768px){
+
+    .upload-grid .upload-card{
+
+        height:auto !important;
+
+        min-height:400px !important;
+
+    }
+
+    .speech-buttons{
+
+        grid-template-columns:1fr !important;
+
+    }
+
+    .upload-grid .upload-card h2{
+
+        font-size:32px !important;
+
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .upload-grid .upload-card{
+
+        padding:26px 22px 22px !important;
+
+    }
+
+    .upload-grid .upload-card h2{
+
+        font-size:28px !important;
+
+    }
+
+    .upload-grid .upload-card p{
+
+        font-size:16px !important;
+
+    }
+
+}
+/* =========================================================
+   FINAL INTERNAL ALIGNMENT
+   OBJECT TRACKING + SPEECH TO TEXT
+========================================================= */
+
+/* =========================================================
+   ALL FOUR CARDS
+========================================================= */
+
+.upload-grid > .upload-card{
+
+    height:430px !important;
+    min-height:430px !important;
+
+    padding:32px 36px 24px !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    justify-content:flex-start !important;
+
+    box-sizing:border-box !important;
+
+}
+
+
+/* =========================================================
+   TOP PART OF EVERY CARD
+   Heading + Description
+========================================================= */
+
+.upload-grid .card-top{
+
+    width:100% !important;
+
+    height:170px !important;
+    min-height:170px !important;
+
+    flex-shrink:0 !important;
+
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.upload-grid .card-icon{
+
+    width:58px !important;
+    height:58px !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    font-size:34px !important;
+
+    margin-bottom:14px !important;
+
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.upload-grid .upload-card h2{
+
+    font-size:38px !important;
+
+    line-height:1.15 !important;
+
+    margin:0 0 14px 0 !important;
+
+    color:#0F172A !important;
+
+    font-weight:800 !important;
+
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.upload-grid .upload-card p{
+
+    font-size:18px !important;
+
+    line-height:1.55 !important;
+
+    color:#475569 !important;
+
+    margin:0 !important;
+
+}
+
+
+/* =========================================================
+   NORMAL CARD FORM
+========================================================= */
+
+.upload-grid .module-form{
+
+    width:100% !important;
+
+    margin:0 !important;
+
+    flex-shrink:0 !important;
+
+}
+
+
+/* =========================================================
+   SPEECH MODULE
+========================================================= */
+
+.upload-grid .speech-module{
+
+    width:100% !important;
+
+    margin:0 !important;
+
+    flex-shrink:0 !important;
+
+}
+
+
+/* =========================================================
+   FILE INPUT
+   SAME LEVEL FOR ALL FOUR
+========================================================= */
+
+.upload-grid .upload-card input[type="file"]{
+
+    width:100% !important;
+
+    height:76px !important;
+
+    padding:17px !important;
+
+    margin:0 0 18px 0 !important;
+
+    border:2px dashed #CBD5E1 !important;
+
+    border-radius:16px !important;
+
+    background:#F8FAFC !important;
+
+    box-sizing:border-box !important;
+
+}
+
+
+/* =========================================================
+   NORMAL CARD BUTTON
+========================================================= */
+
+.upload-grid .module-form > .module-btn{
+
+    width:180px !important;
+
+    height:54px !important;
+
+    min-height:54px !important;
+
+    margin:0 auto !important;
+
+    padding:12px 24px !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    border:none !important;
+
+    border-radius:14px !important;
+
+    background:linear-gradient(
+        135deg,
+        #2563EB,
+        #7C3AED
+    ) !important;
+
+    color:white !important;
+
+    font-size:17px !important;
+
+    font-weight:700 !important;
+
+}
+
+
+/* =========================================================
+   SPEECH BUTTON AREA
+========================================================= */
+
+.speech-buttons{
+
+    width:100% !important;
+
+    display:grid !important;
+
+    grid-template-columns:1fr 1fr !important;
+
+    gap:16px !important;
+
+    margin:0 !important;
+
+    padding:0 !important;
+
+    align-items:stretch !important;
+
+}
+
+
+/* =========================================================
+   SPEECH BUTTONS SAME SIZE
+========================================================= */
+
+.speech-buttons .module-btn{
+
+    width:100% !important;
+
+    height:54px !important;
+
+    min-height:54px !important;
+
+    margin:0 !important;
+
+    padding:12px 10px !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    white-space:nowrap !important;
+
+    border:none !important;
+
+    border-radius:14px !important;
+
+    background:linear-gradient(
+        135deg,
+        #2563EB,
+        #7C3AED
+    ) !important;
+
+    color:white !important;
+
+    font-size:16px !important;
+
+    font-weight:700 !important;
+
+    box-sizing:border-box !important;
+
+}
+
+
+/* =========================================================
+   SPEECH RESULT
+========================================================= */
+
+#speechResult{
+
+    margin:8px 0 0 0 !important;
+
+    min-height:24px !important;
+
+    color:#475569 !important;
+
+    font-size:16px !important;
+
+}
+
+
+/* =========================================================
+   BUTTON HOVER
+========================================================= */
+
+.upload-grid .module-btn:hover{
+
+    transform:translateY(-4px) !important;
+
+    box-shadow:
+        0 15px 35px
+        rgba(37,99,235,.25) !important;
+
+}
+
+
+/* =========================================================
+   CARD HOVER
+========================================================= */
+
+.upload-grid > .upload-card:hover{
+
+    transform:translateY(-8px) !important;
+
+    box-shadow:
+        0 22px 45px
+        rgba(37,99,235,.16) !important;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:1100px){
+
+    .upload-grid{
+
+        grid-template-columns:1fr !important;
+
+    }
+
+}
+
+
+@media(max-width:768px){
+
+    .upload-grid > .upload-card{
+
+        height:auto !important;
+
+        min-height:400px !important;
+
+    }
+
+    .upload-grid .card-top{
+
+        height:auto !important;
+
+        min-height:0 !important;
+
+    }
+
+    .speech-buttons{
+
+        grid-template-columns:1fr !important;
+
+    }
+
+    .speech-buttons .module-btn{
+
+        width:100% !important;
+
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .upload-grid > .upload-card{
+
+        padding:26px 22px 22px !important;
+
+    }
+
+    .upload-grid .upload-card h2{
+
+        font-size:28px !important;
+
+    }
+
+    .upload-grid .upload-card p{
+
+        font-size:16px !important;
+
+    }
+
+}
+/* =========================================================
+   SPEECH RESULT - SHOW OUTSIDE THE CARD
+========================================================= */
+
+/* Card ko result ke liye overflow allow karna */
+.speech-card{
+    overflow:visible !important;
+    position:relative !important;
+}
+
+/* Speech text card ke bahar */
+.speech-card #speechResult,
+.speech-card .speech-result{
+
+    position:absolute !important;
+
+    top:100% !important;
+    left:0 !important;
+
+    width:100% !important;
+
+    margin-top:12px !important;
+
+    padding:0 5px !important;
+
+    min-height:0 !important;
+
+    color:#475569 !important;
+
+    font-size:16px !important;
+
+    line-height:1.5 !important;
+
+    text-align:left !important;
+
+    z-index:5 !important;
+
+    background:transparent !important;
+
+    box-sizing:border-box !important;
+}
+
+
+/* Speech label */
+.speech-card #speechResult b,
+.speech-card .speech-result b{
+
+    color:#2563EB !important;
+
+    font-weight:700 !important;
+}
+
+
+/* Mobile */
+@media(max-width:768px){
+
+    .speech-card #speechResult,
+    .speech-card .speech-result{
+
+        position:static !important;
+
+        width:100% !important;
+
+        margin-top:12px !important;
+
+        padding:0 !important;
+
+    }
 
 }

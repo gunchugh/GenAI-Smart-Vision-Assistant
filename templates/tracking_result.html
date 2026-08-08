@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Object Tracking</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Object Tracking Result</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
@@ -16,13 +21,194 @@
 
     <h1>🎯 Object Tracking Completed</h1>
 
-    <video width="700" controls>
+    <br>
+
+    <video
+        width="900"
+        controls
+        autoplay
+        muted
+        playsinline
+        preload="metadata">
 
         <source
-        src="{{ url_for('static', filename='tracking/' + video) }}"
-        type="video/mp4">
+            src="{{ url_for('static', filename='tracking/' + video) }}"
+            type="video/mp4">
+
+        Your browser does not support HTML5 video.
 
     </video>
+
+    <br><br>
+
+    <h2 style="color:#1E88E5;">
+        🟢 Tracking Successfully Completed
+    </h2>
+
+    <br>
+
+    <!-- ================= SUMMARY CARDS ================= -->
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+
+            <h2>{{ summary.total_objects }}</h2>
+
+            <p>Total Objects</p>
+
+        </div>
+
+        <div class="summary-card">
+
+            <h2>{{ summary.unique_classes }}</h2>
+
+            <p>Unique Classes</p>
+
+        </div>
+
+        <div class="summary-card">
+
+            <h2>{{ summary.most_detected.title() }}</h2>
+
+            <p>Most Detected</p>
+
+        </div>
+
+        <div class="summary-card">
+
+            <h2>{{ summary.tracker }}</h2>
+
+            <p>Tracking Algorithm</p>
+
+        </div>
+
+    </div>
+
+    <br><br>
+
+    <!-- ================= TRACKING INFORMATION ================= -->
+
+    <h2>📊 Tracking Information</h2>
+
+    <div class="caption-card">
+
+        <p class="caption-text">
+
+            ✔ <b>Tracking Status :</b> {{ summary.tracking_status }}
+
+            <br><br>
+
+            ✔ <b>Detection Model :</b> {{ summary.model }}
+
+            <br><br>
+
+            ✔ <b>Tracking Algorithm :</b> {{ summary.tracker }}
+
+            <br><br>
+
+            ✔ <b>Input Type :</b> {{ summary.input_type }}
+
+            <br><br>
+
+            ✔ <b>Persistent IDs :</b> Enabled
+
+            <br><br>
+
+            ✔ <b>Tracking Type :</b> Multi Object Tracking
+
+            <br><br>
+
+            ✔ <b>Output :</b> Tracked Video with Unique IDs
+
+        </p>
+
+    </div>
+
+    <br><br>
+
+    <!-- ================= TRACKED OBJECTS ================= -->
+
+    <h2>📋 Tracked Objects Summary</h2>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+
+        <tr>
+
+            <th>Object</th>
+
+            <th>Count</th>
+
+        </tr>
+
+        {% for label, data in dashboard.items() %}
+
+        <tr>
+
+            <td>{{ label.title() }}</td>
+
+            <td>{{ data.count }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <br><br>
+
+    <!-- ================= ABOUT ================= -->
+
+    <h2>ℹ About Object Tracking</h2>
+
+    <div class="caption-card">
+
+        <p class="caption-text">
+
+            This module performs real-time multi-object tracking
+            using <b>YOLO11</b> together with
+            <b>ByteTrack</b>.
+
+            <br><br>
+
+            Every detected object receives a unique tracking ID
+            that remains consistent throughout the video.
+
+            <br><br>
+
+            This technology is widely used in surveillance,
+            traffic monitoring, crowd analysis,
+            autonomous driving and smart city applications.
+
+        </p>
+
+    </div>
+
+    <br><br>
+
+    <!-- ================= BUTTONS ================= -->
+
+    <a href="{{ url_for('static', filename='tracking/' + video) }}" download>
+
+        <button>
+
+            ⬇ Download Tracked Video
+
+        </button>
+
+    </a>
+
+    <br><br>
+
+    <a href="/download_tracking_report">
+
+        <button>
+
+            📄 Download Tracking Report
+
+        </button>
+
+    </a>
 
     <br><br>
 
@@ -30,7 +216,7 @@
 
         <button>
 
-            Track Another Video
+            🔄 Track Another Video
 
         </button>
 

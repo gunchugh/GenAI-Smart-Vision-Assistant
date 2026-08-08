@@ -12,6 +12,8 @@ from utils.vqa import answer_question
 from utils.voice_vqa import voice_question_answer
 from utils.pdf_report import generate_report
 from utils.charts import generate_charts
+from utils.video_report import generate_video_report
+from utils.tracking_report import generate_tracking_report
 
 app = Flask(__name__)
 
@@ -96,15 +98,25 @@ def video_detect():
 
     video.save(filepath)
 
-    output_video = detect_video(filepath)
+    video_name, dashboard, total_objects, summary, first_frame_path = detect_video(filepath)
+    caption = generate_caption(first_frame_path)
+
+    app.config["VIDEO_FRAME"] = first_frame_path
+    app.config["VIDEO_CAPTION"] = caption
+    app.config["VIDEO_DASHBOARD"] = dashboard
+    app.config["VIDEO_SUMMARY"] = summary
 
     gc.collect()
+
     return render_template(
-        "video_result.html",
-        video=os.path.basename(output_video)
-    )
-
-
+    "video_result.html",
+    video=video_name,
+    dashboard=dashboard,
+    total_objects=total_objects,
+    summary=summary,
+    caption=caption,
+    frame=os.path.basename(first_frame_path)
+)
 # ---------------- OBJECT TRACKING ---------------- #
 
 @app.route("/track", methods=["POST"])
@@ -124,14 +136,18 @@ def track():
     )
 
     video.save(filepath)
-
-    output_video = track_video(filepath)
-
+    result = track_video(filepath)
+    print(result)
+    tracked_video, summary, dashboard = track_video(filepath)
+    app.config["TRACKING_DASHBOARD"] = dashboard
     gc.collect()
+    
     return render_template(
-        "tracking_result.html",
-        video=os.path.basename(output_video)
-    )
+    "tracking_result.html",
+    video=os.path.basename(tracked_video),
+    summary=summary,
+    dashboard=dashboard
+)
 
 
 # ---------------- VISUAL QUESTION ANSWERING ---------------- #
@@ -277,8 +293,46 @@ def download_report():
         pdf,
         as_attachment=True
     )
+# ---------------- VIDEO REPORT ---------------- #
+
+@app.route("/download_video_report")
+def download_video_report():
+
+    frame = app.config.get("VIDEO_FRAME")
+    caption = app.config.get("VIDEO_CAPTION")
+    dashboard = app.config.get("VIDEO_DASHBOARD")
+    summary = app.config.get("VIDEO_SUMMARY")
+
+    pdf = generate_video_report(
+        frame,
+        caption,
+        dashboard,
+        summary
+    )
+
+    return send_from_directory(
+        "static",
+        pdf,
+        as_attachment=True
+    )
+# ---------------- TRACKING REPORT ---------------- #
+
+@app.route("/download_tracking_report")
+def download_tracking_report():
+
+    dashboard = app.config["TRACKING_DASHBOARD"]
+
+    pdf = generate_tracking_report(
+        dashboard
+    )
+
+    return send_from_directory(
+        "static",
+        pdf,
+        as_attachment=True
+    )
 # ---------------- RUN APP ---------------- #
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 7860))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="127.0.0.1", port=port)

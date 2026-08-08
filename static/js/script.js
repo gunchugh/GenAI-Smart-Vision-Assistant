@@ -173,127 +173,261 @@ function showMessage(message) {
    VOICE QUESTION ANSWERING
 ========================================== */
 
-let voiceRecorder;
-let voiceChunks = [];
+/* ==========================================
+   VOICE QUESTION ANSWERING
+========================================== */
 
-const voiceBtn = document.getElementById("voiceBtn");
+document.addEventListener("DOMContentLoaded", function () {
 
-if (voiceBtn) {
+    const voiceBtn = document.getElementById("voiceBtn");
 
-    voiceBtn.onclick = async () => {
+    if (!voiceBtn) {
+        console.log("Voice button not found.");
+        return;
+    }
 
-        if (!voiceRecorder || voiceRecorder.state === "inactive") {
+    let voiceRecorder = null;
+    let voiceChunks = [];
 
-            const stream = await navigator.mediaDevices.getUserMedia({
-                audio: true
-            });
+    voiceBtn.addEventListener("click", async function () {
 
-            voiceRecorder = new MediaRecorder(stream);
+        try {
 
-            voiceChunks = [];
+            /* ==========================
+               START RECORDING
+            ========================== */
 
-            voiceRecorder.ondataavailable = (e) => {
-                voiceChunks.push(e.data);
-            };
+            if (
+                !voiceRecorder ||
+                voiceRecorder.state === "inactive"
+            ) {
 
-            voiceRecorder.onstop = async () => {
+                const stream =
+                    await navigator.mediaDevices.getUserMedia({
+                        audio: true
+                    });
 
-                const blob = new Blob(
-                    voiceChunks,
-                    {
-                        type: "audio/webm"
-                    }
-                );
+                voiceRecorder =
+                    new MediaRecorder(stream);
 
-                const formData = new FormData();
+                voiceChunks = [];
 
-                formData.append(
-                    "audio",
-                    blob,
-                    "voice_question.webm"
-                );
+                voiceRecorder.ondataavailable =
+                    function (event) {
 
-                document.getElementById(
-                    "voiceAnswer"
-                ).innerHTML = "⏳ AI is listening...";
+                        if (event.data.size > 0) {
 
-                try {
+                            voiceChunks.push(
+                                event.data
+                            );
 
-                    const response = await fetch(
-                        "/voice_ask",
-                        {
-                            method: "POST",
-                            body: formData
                         }
-                    );
 
-                    const data = await response.json();
+                    };
 
-                    if (data.error) {
+                voiceRecorder.onstop =
+                    async function () {
 
-                        document.getElementById(
-                            "voiceAnswer"
-                        ).innerHTML = data.error;
+                        /* Stop microphone */
 
-                        return;
-                    }
-
-                    document.getElementById(
-                        "voiceQuestion"
-                    ).innerHTML =
-                        "<b>Question:</b> " +
-                        data.question;
-
-                    document.getElementById(
-                        "voiceAnswer"
-                    ).innerHTML =
-                        "<b>Answer:</b> " +
-                        data.answer;
-
-                    const audioPlayer =
-                        document.getElementById(
-                            "voiceAudio"
+                        stream.getTracks().forEach(
+                            track => track.stop()
                         );
 
-                    audioPlayer.src =
-                        "/static/" + data.audio;
+                        const blob =
+                            new Blob(
+                                voiceChunks,
+                                {
+                                    type: "audio/webm"
+                                }
+                            );
 
-                    audioPlayer.load();
+                        const formData =
+                            new FormData();
 
-                }
+                        formData.append(
+                            "audio",
+                            blob,
+                            "voice_question.webm"
+                        );
 
-                catch (err) {
+                        const questionBox =
+                            document.getElementById(
+                                "voiceQuestion"
+                            );
 
-                    console.log(err);
+                        const answerBox =
+                            document.getElementById(
+                                "voiceAnswer"
+                            );
 
-                    document.getElementById(
-                        "voiceAnswer"
-                    ).innerHTML =
-                        "❌ Voice processing failed.";
+                        if (answerBox) {
 
-                }
+                            answerBox.innerHTML =
+                                "⏳ AI is listening...";
 
-            };
+                        }
 
-            voiceRecorder.start();
+                        try {
 
-            voiceBtn.innerText =
-                "Stop Recording";
+                            const response =
+                                await fetch(
+                                    "/voice_ask",
+                                    {
+                                        method: "POST",
+                                        body: formData
+                                    }
+                                );
+
+                            if (!response.ok) {
+
+                                throw new Error(
+                                    "Voice server error"
+                                );
+
+                            }
+
+                            const data =
+                                await response.json();
+
+                            console.log(
+                                "Voice response:",
+                                data
+                            );
+
+                            /* ==========================
+                               ERROR
+                            ========================== */
+
+                            if (data.error) {
+
+                                if (answerBox) {
+
+                                    answerBox.innerHTML =
+                                        "❌ " +
+                                        data.error;
+
+                                }
+
+                                return;
+
+                            }
+
+                            /* ==========================
+                               QUESTION
+                            ========================== */
+
+                            if (questionBox) {
+
+                                questionBox.innerHTML =
+                                    "<b>Question:</b> " +
+                                    data.question;
+
+                            }
+
+                            /* ==========================
+                               ANSWER
+                            ========================== */
+
+                            if (answerBox) {
+
+                                answerBox.innerHTML =
+                                    "<b>Answer:</b> " +
+                                    data.answer;
+
+                            }
+
+                            /* ==========================
+                               AUDIO ANSWER
+                            ========================== */
+
+                            const audioPlayer =
+                                document.getElementById(
+                                    "voiceAudio"
+                                );
+
+                            if (
+                                audioPlayer &&
+                                data.audio
+                            ) {
+
+                                audioPlayer.src =
+                                    "/static/" +
+                                    data.audio;
+
+                                audioPlayer.load();
+
+                            }
+
+                        }
+
+                        catch (error) {
+
+                            console.error(
+                                "Voice processing error:",
+                                error
+                            );
+
+                            if (answerBox) {
+
+                                answerBox.innerHTML =
+                                    "❌ Voice processing failed.";
+
+                            }
+
+                        }
+
+                    };
+
+                voiceRecorder.start();
+
+                voiceBtn.innerText =
+                    "⏹ Stop Voice Question";
+
+                voiceBtn.classList.add(
+                    "recording"
+                );
+
+            }
+
+            /* ==========================
+               STOP RECORDING
+            ========================== */
+
+            else {
+
+                voiceRecorder.stop();
+
+                voiceBtn.innerText =
+                    "⏳ Processing...";
+
+                voiceBtn.classList.remove(
+                    "recording"
+                );
+
+            }
 
         }
 
-        else {
+        catch (error) {
 
-            voiceRecorder.stop();
+            console.error(
+                "Microphone error:",
+                error
+            );
+
+            alert(
+                "❌ Microphone access is required."
+            );
 
             voiceBtn.innerText =
-                "Start Voice Question";
+                "🎤 Start Voice Question";
 
         }
 
-    };
+    });
 
-}
+});
 /* ==========================================
    DOWNLOAD AI REPORT
 ========================================== */
@@ -335,5 +469,57 @@ async function downloadReport() {
         alert("❌ Failed to download report.");
 
     }
+
+}
+/* ==========================================
+   AUDIO FILE UPLOAD (Speech To Text)
+========================================== */
+
+const uploadSpeechForm =
+    document.getElementById("uploadSpeechForm");
+
+if (uploadSpeechForm) {
+
+    uploadSpeechForm.onsubmit = async function (e) {
+
+        e.preventDefault();
+
+        const formData = new FormData(uploadSpeechForm);
+
+        document.getElementById(
+            "speechResult"
+        ).innerHTML = "⏳ Converting speech to text...";
+
+        try {
+
+            const response = await fetch(
+                "/speech_to_text",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+            const data = await response.json();
+
+            document.getElementById(
+                "speechResult"
+            ).innerHTML =
+                "<b>Speech:</b> " + data.text;
+
+        }
+
+        catch (err) {
+
+            console.log(err);
+
+            document.getElementById(
+                "speechResult"
+            ).innerHTML =
+                "❌ Failed to convert audio.";
+
+        }
+
+    };
 
 }

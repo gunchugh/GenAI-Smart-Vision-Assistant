@@ -219,11 +219,9 @@
 
     <br><br>
 
-    <button onclick="askAI()">
-
-        Ask AI
-
-    </button>
+    <button onclick="askAI()" class="result-btn ask-ai-btn">
+    🤖 Ask AI
+</button>
 
     <br><br>
 
@@ -238,12 +236,14 @@
 
     <h2>🎤 Voice Question Answering</h2>
 
-    <button id="voiceBtn">
+    <button
+    id="voiceBtn"
+    type="button"
+    class="result-btn voice-btn">
 
-        Start Voice Question
+    🎤 Start Voice Question
 
-    </button>
-
+</button>
     <br><br>
 
     <p id="voiceQuestion"></p>
@@ -257,11 +257,17 @@
 <br><br>
 <div class="download-card">
 
-    <button onclick="downloadReport()">
+    <a href="/download_report" class="report-download-link">
+
+    <button
+        type="button"
+        class="result-btn report-btn">
 
         📄 Download Complete AI Report
 
     </button>
+
+</a>
 
 </div>
 
@@ -272,11 +278,9 @@
 
     <a href="/">
 
-        <button>
-
-            🔄 Detect Another Image
-
-        </button>
+        <button class="result-btn detect-btn">
+    🔄 Detect Another Image
+</button>
 
     </a>
 
